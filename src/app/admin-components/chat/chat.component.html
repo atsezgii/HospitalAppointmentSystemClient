@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="layout-specing">
+<div class="d-md-flex justify-content-between">
+  <h5 class="mb-0">Chatbox</h5>
+</div>
+<div class="row">
+<!--
+   <div class="col-xl-12 col-lg-12 col-md-12 col-12 mt-4">
+    <div class="card chat chat-person border-0 shadow rounded">
+      <div class="d-flex justify-content-between border-bottom p-4">
+        <div class="d-flex">
+          <img [src]="currentUser.avatar" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+          <div class="overflow-hidden ms-3">
+            <a href="#" class="text-dark mb-0 h6 d-block text-truncate">{{currentUser.name}}</a>
+            <small class="text-muted"><i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i> Online</small>
+          </div>
+        </div>
+      </div>
+
+      <ul class="p-4 list-unstyled mb-0 chat" style="background: url('../assets/images/bg/bg-chat.png') center center; max-height: 555px; overflow-y: scroll;">
+        <li *ngFor="let message of messages" [class.chat-right]="message.user === currentUser.name">
+          <div class="d-inline-block">
+            <div class="d-flex chat-type mb-3">
+              <div class="position-relative">
+                <img [src]="message.avatar" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
+              </div>
+              <div class="chat-msg" style="max-width: 500px;">
+                <p class="text-muted small shadow px-3 py-2 bg-light rounded mb-1">{{message.text}}</p>
+                <small class="text-muted msg-time"><i class="fas fa-clock-nine me-1"></i>{{message.time}}</small>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="p-2 rounded-bottom shadow">
+        <div class="row">
+          <div class="col">
+            <input [(ngModel)]="newMessage" type="text" class="form-control border" placeholder="Enter Message...">
+          </div>
+          <div class="col-auto">
+            <button (click)="sendMessage()" class="btn btn-icon btn-primary"><i class="fas fa-paper-plane"></i></button>
+            <button class="btn btn-icon btn-primary"><i class="fas fa-smile"></i></button>
+            <button class="btn btn-icon btn-primary"><i class="fas fa-paperclip"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+</div>
+
+<div>
+  <input [(ngModel)]="user" placeholder="User" />
+  <input [(ngModel)]="message" placeholder="Message" />
+  <button (click)="sendMessage()">Send</button>
+</div>
+
+<div *ngFor="let msg of messages">
+  <strong>{{msg.user}}:</strong> {{msg.message}}
+</div>
+</div>
+</div>

@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-xl-9 col-lg-6 col-md-4">
+      <h5 class="mb-0">Doctors</h5>
+
+  </div><!--end col-->
+
+  <div class="col-xl-3 col-lg-6 col-md-8 mt-4 mt-md-0">
+      <div class="justify-content-md-end">
+
+      </div>
+  </div><!--end col-->
+</div>
+
+
+<div class="row">
+  <div class="col-12 mt-4">
+      <div class="table-responsive bg-white shadow rounded">
+          <table class="table mb-0 table-center">
+              <thead>
+                  <tr>
+                      <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                      <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
+                      <th class="border-bottom p-3">Age</th>
+                      <th class="border-bottom p-3">Gender</th>
+                      <th class="border-bottom p-3">Department</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Specialist Level</th>
+                      <th class="border-bottom p-3">Biography</th>
+                      <th class="border-bottom p-3">Fees</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let doctor of doctors">
+                      <th class="p-3">{{doctor.id}}</th>
+                      <td class="p-3">
+                          <a href="#" class="text-dark">
+                              <div class="d-flex align-items-center">
+                                  <img src="../assets/images/client/01.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                  <span class="ms-2">{{doctor.firstName}} {{ doctor.lastName }}</span>
+                              </div>
+                          </a>
+                      </td>
+                      <td class="p-3">{{ doctor.email}}</td>
+                      <td class="p-3">{{ doctor.departmentId }}</td>
+                      <td class="p-3">{{ doctor.specialistLevel }}</td>
+                      <td class="p-3">{{ doctor.biography }}</td>
+                      <td>{{ doctor.specialistLevel }}</td>
+                      <td>{{ doctor.biography }}</td>
+                      <td class="text-end p-3">
+                          <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment"><i class="fas fa-eye"></i></a>
+                          <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="fas fa-check-circle"></i></a>
+                          <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="fas fa-times-circle"></i></a>
+                      </td>
+                  </tr>
+
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<div class="row text-center">
+  <!-- PAGINATION START -->
+  <div class="col-12 mt-4">
+      <div class="d-md-flex align-items-center text-center justify-content-between">
+        <span class="text-muted me-3">Showing {{pageRequest.page * pageRequest.size + 1}} - {{(pageRequest.page + 1) * pageRequest.size}} out of {{count}}</span>
+      <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+        <li class="page-item" [class.disabled]="pageRequest.page === 0">
+          <a class="page-link" (click)="onPageChange(pageRequest.page - 1)" aria-label="Previous">Prev</a>
+        </li>
+        <li class="page-item" *ngFor="let page of getPagesArray()" [class.active]="pageRequest.page === page">
+          <a class="page-link" (click)="onPageChange(page)">{{page + 1}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="pageRequest.page >= totalPages - 1">
+          <a class="page-link" (click)="onPageChange(pageRequest.page + 1)" aria-label="Next">Next</a>
+        </li>
+      </ul>
+      </div>
+  </div><!--end col-->
+  <!-- PAGINATION END -->
+</div>

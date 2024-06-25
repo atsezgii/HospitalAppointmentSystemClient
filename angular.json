@@ -36,7 +36,6 @@
               "src/assets/libs/tiny-slider/tiny-slider.css",
               "src/assets/libs/tobii/css/tobii.min.css",
               "src/assets/css/bootstrap.min.css",
-              "src/assets/css/icons.min.css",
               "src/assets/libs/remixicon/fonts/remixicon.css",
               "src/assets/css/style.min.css"
             ],
@@ -49,7 +48,6 @@
               "src/assets/js/plugins.init.js",
               "src/assets/js/app.js",
               "src/assets/libs/simplebar/simplebar.min.js",
-              "src/assets/libs/apexcharts/apexcharts.min.js",
               "src/assets/js/admin-apexchart.init.js"
             ],
             "server": "src/main.server.ts",

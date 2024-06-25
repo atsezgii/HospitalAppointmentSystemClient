@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from './services/chat.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { Message } from './models/message';
 @Component({
   selector: 'app-chat',
   standalone: true,
@@ -13,21 +13,35 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })
-export class ChatComponent {
-  user: string = '';
-  message: string = '';
-  messages: { user: string, message: string }[] = [];
+export class ChatComponent implements OnInit{
+  messages: Message[] = [];
+  newMessage: string = '';
+  currentUser = {
+    id: 'user1',
+    name: 'Cristino Murphy',
+    avatar: '../assets/images/doctors/02.jpg'
+  };
 
   constructor(private chatService: ChatService) {}
-  ngOnInit(): void {
-    this.chatService.onMessageReceived((user, message) => {
-      this.messages.push({ user, message });
+ngOnInit(): void {
+  this.onMessageReceive();
+  }
+
+
+  onMessageReceive(){
+    this.chatService.onMessageReceived((user: string, message: string) => {
+      this.messages.push({
+        user: user,
+        avatar: user === this.currentUser.name ? this.currentUser.avatar : '../assets/images/doctors/02.jpg',
+        text: message,
+        time: new Date().toLocaleTimeString()
+      });
     });
   }
   sendMessage(): void {
-    if (this.user && this.message) {
-      this.chatService.sendMessage(this.user, this.message);
-      this.message = '';
+    if (this.newMessage.trim()) {
+      this.chatService.sendMessage(this.currentUser.name, this.newMessage);
+      this.newMessage = '';
     }
   }
 }

@@ -5,6 +5,7 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
 import { AdminComponent } from './admin-components/admin/admin.component';
 import { DoctorsComponent } from './admin-components/doctors/doctors.component';
 import { ChatComponent } from './admin-components/chat/chat.component';
+import { AddDoctorComponent } from './features/doctors/components/add-doctor/add-doctor.component';
 
 
 export const routes: Routes = [
@@ -12,10 +13,14 @@ export const routes: Routes = [
   children: [
   {path:"",component:HomeComponent}
   ]},
+
+
+
   {path:"admin",component:AdminLayoutComponent,
   children:[
   {path:"",component:AdminComponent},
   {path:"doctor",component:DoctorsComponent},
+  {path:"adddoctor",component:AddDoctorComponent},
   {path:"chat",component:ChatComponent},
 
   ]},

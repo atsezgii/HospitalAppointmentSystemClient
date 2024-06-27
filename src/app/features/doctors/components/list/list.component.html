@@ -15,32 +15,26 @@
                   <tr>
                       <th class="border-bottom p-3" style="min-width: 50px;">#</th>
                       <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
-                      <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
-                      <th class="border-bottom p-3">Age</th>
-                      <th class="border-bottom p-3">Gender</th>
-                      <th class="border-bottom p-3">Department</th>
-                      <th class="border-bottom p-3" style="min-width: 150px;">Specialist Level</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Department</th>
                       <th class="border-bottom p-3">Biography</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Specialist Level</th>
                       <th class="border-bottom p-3">Fees</th>
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let doctor of doctors">
-                      <th class="p-3">{{doctor.id}}</th>
+                  <tr *ngFor="let doctor of combinedData">
+                      <td class="p-3">{{doctor.id}}</td>
                       <td class="p-3">
                           <a href="#" class="text-dark">
                               <div class="d-flex align-items-center">
                                   <img src="../assets/images/client/01.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                  <span class="ms-2">{{doctor.firstName}} {{ doctor.lastName }}</span>
+                                  <span class="ms-2">{{doctor.userName}}</span>
                               </div>
                           </a>
                       </td>
-                      <td class="p-3">{{ doctor.email}}</td>
-                      <td class="p-3">{{ doctor.departmentId }}</td>
-                      <td class="p-3">{{ doctor.specialistLevel }}</td>
+                      <td class="p-3">{{ doctor.departmentName }}</td>
                       <td class="p-3">{{ doctor.biography }}</td>
-                      <td>{{ doctor.specialistLevel }}</td>
-                      <td>{{ doctor.biography }}</td>
+                      <td class="p-3">{{ doctor.specialistLevel }}</td>
                       <td class="text-end p-3">
                           <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment"><i class="fas fa-eye"></i></a>
                           <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="fas fa-check-circle"></i></a>

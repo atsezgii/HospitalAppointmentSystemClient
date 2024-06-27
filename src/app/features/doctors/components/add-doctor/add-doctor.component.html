@@ -13,58 +13,34 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label class="form-label" for="firstName">First Name</label>
-                            <input formControlName="firstName" id="firstName" type="text" class="form-control" autocomplete="off" placeholder="First Name :">
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label" for="lastName">Last Name</label>
-                            <input formControlName="lastName" id="lastName" type="text" class="form-control" autocomplete="on" placeholder="Last Name :">
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label" for="email">Your Email</label>
-                            <input formControlName="email" id="email" type="email" class="form-control"autocomplete="off" placeholder="Your email :">
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label" for="phoneNumber">Phone no.</label>
-                            <input formControlName="phoneNumber" id="phoneNumber" type="text" class="form-control" placeholder="Phone no. :">
-                        </div>
-                    </div><!--end col-->
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
                             <label class="form-label" for="departmentId">Departments</label>
                             <select class="form-select form-control" formControlName="departmentId" id="departmentId">
-                                <option value="8">Eye Care</option>
-                                <option value="1">Gynecologist</option>
-                                <option value="2">Psychotherapist</option>
-                                <option value="3">Orthopedic</option>
-                                <option value="4">Dentist</option>
-                                <option value="5">Gastrologist</option>
-                                <option value="6">Urologist</option>
-                                <option value="7">Neurologist</option>
+                              <option value="" disabled selected>Select a department</option>
+                              <option *ngFor="let department of departments" [value]="department.id">
+                                {{ department.name }}
+                              </option>
                             </select>
                         </div>
                     </div><!--end col-->
 
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label class="form-label" for="gender">Gender</label>
-                            <select class="form-select form-control" formControlName="gender" id="gender">
-                                <option value="0">Male</option>
-                                <option value="1">Female</option>
-                            </select>
-                        </div>
-                    </div><!--end col-->
-
+                      <div class="mb-3">
+                          <label class="form-label" for="userId">User Id</label>
+                          <input formControlName="userId" id="userId" type="text" class="form-control" placeholder="User Id :">
+                      </div>
+                  </div><!--end col-->
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="yearsOfExperience">Years Of Experience</label>
+                        <input formControlName="yearsOfExperience" id="yearsOfExperience" type="text" class="form-control" placeholder="Years Of Experience :">
+                    </div>
+                </div><!--end col-->
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="biography">Biography</label>
+                        <input formControlName="biography" id="biography" type="text" class="form-control" placeholder="Biography :">
+                    </div>
+                </div><!--end col-->
                     <div class="col-md-6">
                       <div class="mb-3">
                           <label class="form-label" for="biography">Biography</label>
@@ -78,18 +54,8 @@
                     </div>
                 </div><!--end col-->
 
-                  <div class="col-md-6">
-                      <div class="mb-3">
-                          <label class="form-label" for="address">Address</label>
-                          <input formControlName="address" id="address" type="text" class="form-control" placeholder="Address :">
-                      </div>
-                  </div><!--end col-->
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                        <label class="form-label" for="password">Password</label>
-                        <input formControlName="password" id="password" type="text" class="form-control" placeholder="Password :">
-                    </div>
-                </div><!--end col-->
+
+
 
                 </div>
 

@@ -1,18 +1,19 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { appRouterProviders } from './app/app.routes';
+import { appConfig } from './app/app.config';
+import { AuthService } from './app/features/auth/services/auth.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientService } from './app/services/common/http-client.service';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AuthService } from './app/features/auth/services/auth.service';
-import { authGuard } from './app/guards/auth.guard';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { appRouterProviders } from './app/app.routes';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
-    { provide: 'baseUrl', useValue: 'https://localhost:7144/api' },  // Base URL'i buraya ekleyin
+    { provide: 'baseUrl', useValue: 'https://localhost:7144/api' },  // Add the base URL here
     HttpClientService,
-    appRouterProviders, provideAnimationsAsync(),
-    AuthService]
+    appRouterProviders,
+    provideAnimations(),
+    AuthService
+  ]
 }).catch(err => console.error(err));

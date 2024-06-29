@@ -10,4 +10,5 @@ export class ListUser{
   address:string;
   birthDate:Date;
   userType:string;
+  isDeleted:false;
 }

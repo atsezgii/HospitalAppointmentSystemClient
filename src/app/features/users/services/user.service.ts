@@ -20,13 +20,20 @@ export class UserService {
         })
       );
   }
-
-
   updateUser(user: Partial<UpdateUser>): Observable<UpdateUser> {
     const requestParameter: Partial<RequestParameters> = {
       controller: 'User',
     };
+    console.log("testttt",user)
     return this.httpClientService.put<UpdateUser>(requestParameter, user);
   }
+  deleteUser(userId: number): Observable<void> {
+    const requestParameters: Partial<RequestParameters> = {
+      controller: 'User'
+    };
+    console.log("userid from service", userId)
+    return this.httpClientService.delete<void>(requestParameters, userId);
+  }
+
 
 }

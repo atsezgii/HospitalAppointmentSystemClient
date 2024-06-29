@@ -1,0 +1,20 @@
+
+<div class="modal fade show" style="display: block;" aria-modal="true" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded shadow border-0">
+      <div class="modal-header border-bottom">
+        <h2 class="modal-title">Are you sure?</h2>
+        <button type="button" class="btn btn-icon btn-close" (click)="cancel()">
+          <i class="uil uil-times fs-4 text-dark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this department?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="confirm()" class="btn btn-danger">Evet</button>
+        <button type="button" (click)="cancel()" class="btn btn-soft-secondary">Hayır</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -59,14 +59,14 @@ export class HttpClientService {
     return this.httpClient.put<T>(url,body,{headers:requestParameter.headers})
   }
 
-  delete<T>(requsetParameters:Partial<RequestParameters>, id: string):Observable<T>{
+  delete<T>(requsetParameters:Partial<RequestParameters>, id: number):Observable<T>{
     let url : string = "";
     if(requsetParameters.fullEndPoint)
       url= requsetParameters.fullEndPoint;
     else
-      url = `${this.url(requsetParameters)}/${id}`
+      url = `${this.url(requsetParameters)}/soft-delete/${id}`
 
-    return this.httpClient.delete<T>(url,{headers:requsetParameters.headers})
+    return this.httpClient.patch<T>(url,{headers:requsetParameters.headers})
   }
 }
 export class RequestParameters{

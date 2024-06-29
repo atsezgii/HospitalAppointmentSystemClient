@@ -1,9 +1,8 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DoctorService } from '../../services/doctor.service';
 import { ListDoctor } from '../../models/list-doctor';
 import { PageRequest } from '../../../../services/common/http-client.service';
 import { CommonModule } from '@angular/common';
-import { DoctorsComponent } from '../../../../admin-components/doctors/doctors.component';
 import { ApiResponse } from '../../models/list-doctor-response';
 import { Subscription } from 'rxjs';
 import { ListUser } from '../../../users/models/list-user';
@@ -13,22 +12,23 @@ import { DepartmentService } from '../../../departments/services/department.serv
 import { ListDepartment } from '../../../departments/models/list-department';
 
 @Component({
-  selector: "app-list",
+  selector: 'app-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: "./list.component.html",
-  styleUrl: "./list.component.scss"
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss'
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   doctors: ListDoctor[] = [];
   users: ListUser[] = [];
   departments: ListDepartment[] = [];
   combinedData: any[] = [];
   pageRequest: PageRequest = { page: 0, size: 10 };
   count: number = 0;
-  subscription: Subscription;
+  subscriptions: Subscription[] = [];
   doctorsLoaded: boolean = false;
   usersLoaded: boolean = false;
+  departmentsLoaded: boolean = false;
 
   constructor(
     private doctorService: DoctorService,
@@ -41,46 +41,52 @@ export class ListComponent implements OnInit {
     this.loadUsers();
     this.loadDepartments();
   }
-  async loadDoctors() {
-    this.subscription = this.doctorService.read(this.pageRequest).subscribe({
+
+  loadDoctors() {
+    const doctorsSubscription = this.doctorService.read(this.pageRequest).subscribe({
       next: (response: ApiResponse) => {
         this.doctors = response.items;
         this.count = response.count;
-        console.log("count", this.count);
         this.doctorsLoaded = true;
         this.checkDataLoaded();
-        console.log("doctors", this.doctors);
       },
       error: (error: any) => {
-        console.error("Error loading doctors:", error);
+        console.error('Error loading doctors:', error);
       }
     });
+    this.subscriptions.push(doctorsSubscription);
   }
-  async loadUsers() {
-    this.subscription = this.userService.read(this.pageRequest).subscribe({
+
+  loadUsers() {
+    const usersSubscription = this.userService.read(this.pageRequest).subscribe({
       next: (response: UserListApiResponse) => {
         this.users = response.items;
         this.usersLoaded = true;
         this.checkDataLoaded();
       },
       error: (error: any) => {
-        console.error("Error loading users:", error);
+        console.error('Error loading users:', error);
       }
     });
+    this.subscriptions.push(usersSubscription);
   }
-  loadDepartments(): void {
-    this.departmentService.read(this.pageRequest).subscribe({
+
+  loadDepartments() {
+    const departmentsSubscription = this.departmentService.read(this.pageRequest).subscribe({
       next: response => {
         this.departments = response.items;
-        console.log("deps", this.departments);
+        this.departmentsLoaded = true;
+        this.checkDataLoaded();
       },
       error: err => {
-        console.error("Department load failed", err);
+        console.error('Department load failed', err);
       }
     });
+    this.subscriptions.push(departmentsSubscription);
   }
+
   checkDataLoaded(): void {
-    if (this.doctorsLoaded && this.usersLoaded) {
+    if (this.doctorsLoaded && this.usersLoaded && this.departmentsLoaded) {
       this.combineData();
     }
   }
@@ -88,30 +94,25 @@ export class ListComponent implements OnInit {
   combineData(): void {
     this.combinedData = this.doctors.map(doctor => {
       const user = this.users.find(u => u.id === doctor.userId);
-      const department = this.departments.find(
-        d => d.id === doctor.departmentId
-      );
-      // console.log('Doctor:', doctor);  // Her bir doktoru kontrol edin
-      // console.log('Matched User:', user);  // Eşleşen kullanıcıyı kontrol edin
+      const department = this.departments.find(d => d.id === doctor.departmentId);
       return {
         ...doctor,
-        userName: user ? `${user.firstName} ${user.lastName}` : "Unknown",
-        departmentName: department ? department.name : "Unknown"
+        userName: user ? `${user.firstName} ${user.lastName}` : 'Unknown',
+        departmentName: department ? department.name : 'Unknown'
       };
     });
-    console.log("Combined Data:", this.combinedData);
+    console.log('Combined Data:', this.combinedData);
   }
-  // Abonelik iptal edildiğinde (component kapatıldığında vs.) subscription'ı unsubscribe etmek için:
+
   ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   onPageChange(page: number): void {
     this.pageRequest.page = page;
     this.loadDoctors();
   }
+
   get totalPages(): number {
     return Math.ceil(this.count / this.pageRequest.size);
   }

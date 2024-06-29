@@ -11,6 +11,11 @@ import { RegisterComponent } from './features/auth/register/register/register.co
 import { UsersComponent } from './admin-components/users/users.component';
 import { UserDetailComponent } from './features/users/components/user-detail/user-detail.component';
 import { authGuard } from './guards/auth.guard';
+import { PatientsComponent } from './admin-components/patients/patients.component';
+import { DepartmentsComponent } from './admin-components/departments/departments.component';
+import { AddDepartmentComponent } from './features/departments/components/add-department/add-department.component';
+import { UpdateDepartment } from './features/departments/models/update-department';
+import { UpdateDepartmentComponent } from './features/departments/components/update-department/update-department.component';
 
 
 export const routes: Routes = [
@@ -27,11 +32,21 @@ export const routes: Routes = [
   {path:"admin",component:AdminLayoutComponent,
   children:[
   {path:"",component:AdminComponent,canActivate: [authGuard]},
+
   {path:"doctor",component:DoctorsComponent,canActivate: [authGuard]},
   {path:"adddoctor",component:AddDoctorComponent,canActivate: [authGuard]},
+
   {path:"chat",component:ChatComponent,canActivate: [authGuard]},
+
   {path:"users",component:UsersComponent,canActivate: [authGuard]},
-  { path:'user/:id', component: UserDetailComponent ,canActivate: [authGuard]}
+  { path:'user/:id', component: UserDetailComponent ,canActivate: [authGuard]},
+
+  {path:"patients",component:PatientsComponent,canActivate: [authGuard]},
+
+  {path:"departments",component:DepartmentsComponent,canActivate: [authGuard]},
+  {path:"addDepartment",component:AddDepartmentComponent,canActivate: [authGuard]},
+  { path:'department/:id', component:UpdateDepartmentComponent ,canActivate: [authGuard]},
+
 
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },// Varsayılan rota login

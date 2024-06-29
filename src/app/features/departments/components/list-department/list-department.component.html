@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xl-9 col-lg-6 col-md-4">
+      <h3 class="mb-0">Departments</h3>
+  </div><!--end col-->
+</div>
+<div class="row">
+  <div class="col-12 mt-4">
+      <div class="table-responsive bg-white shadow rounded">
+          <table class="table mb-0 table-center">
+              <thead>
+                  <tr>
+                      <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                      <th class="border-bottom p-3" style="min-width: 180px;">Department Name</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Department Description</th>
+                      <th class="border-bottom p-3">Fees</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let department of departments">
+                      <td class="p-3">{{department.id}}</td>
+                      <td class="p-3">{{ department.name }}</td>
+                      <td class="p-3">{{ department.description }}</td>
+                      <td class="text-end p-3">
+                        <a (click)="showDepartmentDetails(department)" class="btn btn-icon btn-pills btn-soft-success"><i class="fas fa-pencil"></i></a>
+                          <a (click)="showDeleteModal(department)" class="btn btn-icon btn-pills btn-soft-danger"><i class="fas fa-times-circle"></i></a>
+                      </td>
+                  </tr>
+
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+<!-- pagination start -->
+<div class="row text-center">
+  <!-- PAGINATION START -->
+  <div class="col-12 mt-4">
+      <div class="d-md-flex align-items-center text-center justify-content-between">
+        <span class="text-muted me-3">Showing {{pageRequest.page * pageRequest.size + 1}} - {{(pageRequest.page + 1) * pageRequest.size}} out of {{count}}</span>
+      <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+        <li class="page-item" [class.disabled]="pageRequest.page === 0">
+          <a class="page-link" (click)="onPageChange(pageRequest.page - 1)" aria-label="Previous">Prev</a>
+        </li>
+        <li class="page-item" *ngFor="let page of getPagesArray()" [class.active]="pageRequest.page === page">
+          <a class="page-link" (click)="onPageChange(page)">{{page + 1}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="pageRequest.page >= totalPages - 1">
+          <a class="page-link" (click)="onPageChange(pageRequest.page + 1)" aria-label="Next">Next</a>
+        </li>
+      </ul>
+      </div>
+  </div><!--end col-->
+  <!-- PAGINATION END -->
+</div>
+<!-- pagination end -->
+<app-confirm-delete-modal
+  *ngIf="showModal"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+></app-confirm-delete-modal>

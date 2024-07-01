@@ -1,1 +1,32 @@
-<p>add-operation-claim works!</p>
+<div class="layout-specing">
+  <div class="d-md-flex justify-content-between">
+    <h5 class="mb-0">Add New Claim</h5>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-12">
+        <div class="card border-0 p-4 rounded shadow">
+            <div class="row align-items-center">
+
+              <form class="mt-4" [formGroup]="operationClaimFormGroup" (ngSubmit)="onFormSubmit()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label" for="name">Operation Claim Name</label>
+                      <input formControlName="name" id="name" type="text" class="form-control" placeholder="Operation Claim Name :">
+                      <div *ngIf="operationClaimFormGroup.get('name')?.touched && operationClaimFormGroup.get('name')?.invalid">
+                        <small class="text-danger" *ngIf="operationClaimFormGroup.get('name')?.errors?.['required']">Name is required.</small>
+                      </div>
+                    </div>
+                  </div><!--end col-->
+
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+              </form>
+
+        </div>
+    </div><!--end col-->
+
+</div>
+</div>
+

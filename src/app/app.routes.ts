@@ -22,6 +22,7 @@ import { UpdateFeedbackComponent } from './features/feedbacks/components/update-
 import { AddFeeedbackComponent } from './features/feedbacks/components/add-feeedback/add-feeedback.component';
 import { OperationClaimsComponent } from './admin-components/operation-claims/operation-claims.component';
 import { UpdateOperationClaimComponent } from './features/operation-claims/components/update-operation-claim/update-operation-claim.component';
+import { AddOperationClaimComponent } from './features/operation-claims/components/add-operation-claim/add-operation-claim.component';
 
 
 export const routes: Routes = [
@@ -60,6 +61,7 @@ export const routes: Routes = [
 
   {path:"claims",component:OperationClaimsComponent,canActivate: [authGuard]},
   {path:"claim/:id",component:UpdateOperationClaimComponent,canActivate: [authGuard]},
+  {path:"addClaim",component:AddOperationClaimComponent,canActivate: [authGuard]},
 
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },// Varsayılan rota login

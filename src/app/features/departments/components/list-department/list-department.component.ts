@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { DepartmentDataShareService } from '../../services/department-data-share.service';
 import { Router } from '@angular/router';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
+import { UserService } from '../../../users/services/user.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-list-department',
@@ -22,6 +24,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
   count: number = 0;
   showModal: boolean = false;
   departmentToDelete: ListDepartment | null = null;
+  userId:any
   constructor(
     private departmentService: DepartmentService,
     private departmentDataShareService: DepartmentDataShareService,
@@ -30,6 +33,7 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadDepartments();
+
   }
 
   ngOnDestroy(): void {
@@ -39,8 +43,8 @@ export class ListDepartmentComponent implements OnInit, OnDestroy {
   loadDepartments() {
     const departmentsSubscription = this.departmentService.read(this.pageRequest).subscribe({
       next: response => {
-        this.departments = response.items.filter((department: any) => !department.isDeleted);
-        this.count =this.departments.length;
+        this.departments = response.items//.filter((department: any) => !department.isDeleted);
+        this.count =response.count;
         console.log("depsssss", this.departments);
       },
       error: err => {

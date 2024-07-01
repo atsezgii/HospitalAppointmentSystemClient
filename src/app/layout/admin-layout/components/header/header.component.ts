@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../../features/auth/services/auth.service';
 
@@ -9,9 +9,17 @@ import { AuthService } from '../../../../features/auth/services/auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  user:string;
   constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.getCurrentUser()
+   }
 logout() {
   this.authService.logout();}
-
+  getCurrentUser(){
+    this.user = this.authService.getCurrentUserName();
+    console.log('Current User ID:', this.user);
+  }
 }

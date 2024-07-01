@@ -7,11 +7,12 @@ import { ListDepartment } from '../../models/list-department';
 import { DepartmentService } from '../../services/department.service';
 import { MessageType } from '../../../../services/alertify/enums/MessageType';
 import { Position } from '../../../../services/alertify/enums/Position';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-department',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './update-department.component.html',
   styleUrl: './update-department.component.scss'
 })

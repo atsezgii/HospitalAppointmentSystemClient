@@ -1,0 +1,32 @@
+<div class="layout-specing">
+  <div class="d-md-flex justify-content-between">
+    <h2 class="mb-0">Update operationClaim</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-12">
+        <div class="card border-0 p-4 rounded shadow">
+            <div class="row align-items-center">
+
+            <form class="mt-4" [formGroup]="operationClaimDetailFormGroup"
+            (submit)="onSubmit()">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="name">operationClaim Name</label>
+                        <input formControlName="name" id="name" type="text" class="form-control" placeholder="operationClaim Name :">
+                        <div *ngIf="operationClaimDetailFormGroup.get('name')?.touched && operationClaimDetailFormGroup.get('name')?.invalid">
+                          <small class="text-danger" *ngIf="operationClaimDetailFormGroup.get('name')?.errors?.['required']">Name is required.</small>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+    </div><!--end col-->
+
+</div>
+</div>
+

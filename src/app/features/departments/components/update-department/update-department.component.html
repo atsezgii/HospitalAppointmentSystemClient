@@ -15,12 +15,18 @@
                     <div class="mb-3">
                         <label class="form-label" for="name">Department Name</label>
                         <input formControlName="name" id="name" type="text" class="form-control" placeholder="Department Name :">
+                        <div *ngIf="departmentDetailFormGroup.get('name')?.touched && departmentDetailFormGroup.get('name')?.invalid">
+                          <small class="text-danger" *ngIf="departmentDetailFormGroup.get('name')?.errors?.['required']">Name is required.</small>
+                        </div>
                     </div>
                 </div><!--end col-->
                   <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label" for="description">Description</label>
                         <input formControlName="description" id="description" type="text" class="form-control" placeholder="Description :">
+                        <div *ngIf="departmentDetailFormGroup.get('description')?.touched && departmentDetailFormGroup.get('description')?.invalid">
+                          <small class="text-danger" *ngIf="departmentDetailFormGroup.get('description')?.errors?.['required']">Description is required.</small>
+                        </div>
                     </div>
                 </div><!--end col-->
                 </div>

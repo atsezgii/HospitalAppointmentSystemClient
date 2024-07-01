@@ -38,6 +38,7 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/user', user.id]);
   }
   loadUsers(): void {
+    // debugger;
     this.subscription = this.userService.read(this.pageRequest).subscribe({
       next: (response: UserListApiResponse) => {
         this.users = response.items.filter((user:any)=>!user.isDeleted);

@@ -37,15 +37,21 @@
       <div class="p-2 rounded-bottom shadow">
         <div class="row">
           <div class="col">
-            <input [(ngModel)]="newMessage" type="text" class="form-control border" placeholder="Enter Message...">
+            <input
+              [(ngModel)]="newMessage"
+              type="text"
+              class="form-control border"
+              placeholder="Enter Message..."
+              (keydown.enter)="sendMessage()">
           </div>
           <div class="col-auto">
-            <button (click)="sendMessage()" class="btn btn-icon btn-primary"><i class="fas fa-paper-plane"></i></button>
-            <button class="btn btn-icon btn-primary"><i class="fas fa-smile"></i></button>
-            <button class="btn btn-icon btn-primary"><i class="fas fa-paperclip"></i></button>
+            <button (click)="sendMessage()" class="btn btn-icon btn-primary">
+              <i class="fas fa-paper-plane"></i>
+            </button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 

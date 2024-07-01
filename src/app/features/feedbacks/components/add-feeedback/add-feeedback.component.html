@@ -1,0 +1,49 @@
+<div class="layout-specing">
+  <div class="d-md-flex justify-content-between">
+    <h5 class="mb-0">Add New Doctor</h5>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-12">
+        <div class="card border-0 p-4 rounded shadow">
+            <div class="row align-items-center">
+
+              <form class="mt-4" [formGroup]="feedbackFormGroup" (ngSubmit)="onFormSubmit()">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <label class="form-label" for="title">Feedback Name</label>
+                      <input formControlName="title" id="title" type="text" class="form-control" placeholder="Feedback Title :">
+                      <div *ngIf="feedbackFormGroup.get('title')?.touched && feedbackFormGroup.get('title')?.invalid">
+                        <small class="text-danger" *ngIf="feedbackFormGroup.get('title')?.errors?.['required']">Feedback Name is required.</small>
+                      </div>
+                    </div>
+                  </div><!--end col-->
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <label class="form-label" for="description">Description</label>
+                      <input formControlName="description" id="description" type="text" class="form-control" placeholder="Description :">
+                      <div *ngIf="feedbackFormGroup.get('description')?.touched && feedbackFormGroup.get('description')?.invalid">
+                        <small class="text-danger" *ngIf="feedbackFormGroup.get('description')?.errors?.['required']">Description is required.</small>
+                      </div>
+                    </div>
+                  </div><!--end col-->
+                  <div class="col-md-12">
+                    <div class="mb-3">
+                      <label class="form-label">Rating</label>
+                      <app-star-rating formControlName="rating"></app-star-rating>
+                      <div *ngIf="feedbackFormGroup.get('rating')?.touched && feedbackFormGroup.get('rating')?.invalid">
+                        <small class="text-danger" *ngIf="feedbackFormGroup.get('rating')?.errors?.['required']">Rating is required.</small>
+                      </div>
+                    </div>
+                  </div><!--end col-->
+                </div>
+                <button type="submit" class="btn btn-primary">Add feedback</button>
+              </form>
+
+        </div>
+    </div><!--end col-->
+
+</div>
+</div>
+

@@ -8,24 +8,30 @@
         <div class="card border-0 p-4 rounded shadow">
             <div class="row align-items-center">
 
-            <form class="mt-4" [formGroup]="departmenFormGroup"
-            (submit)="onFormSubmit()">
+              <form class="mt-4" [formGroup]="departmenFormGroup" (ngSubmit)="onFormSubmit()">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="mb-3">
-                        <label class="form-label" for="name">Department Name</label>
-                        <input formControlName="name" id="name" type="text" class="form-control" placeholder="Department Name :">
+                      <label class="form-label" for="name">Department Name</label>
+                      <input formControlName="name" id="name" type="text" class="form-control" placeholder="Department Name :">
+                      <div *ngIf="departmenFormGroup.get('name')?.touched && departmenFormGroup.get('name')?.invalid">
+                        <small class="text-danger" *ngIf="departmenFormGroup.get('name')?.errors?.['required']">Name is required.</small>
+                      </div>
                     </div>
-                </div><!--end col-->
+                  </div><!--end col-->
                   <div class="col-md-6">
                     <div class="mb-3">
-                        <label class="form-label" for="description">Description</label>
-                        <input formControlName="description" id="description" type="text" class="form-control" placeholder="Description :">
+                      <label class="form-label" for="description">Description</label>
+                      <input formControlName="description" id="description" type="text" class="form-control" placeholder="Description :">
+                      <div *ngIf="departmenFormGroup.get('description')?.touched && departmenFormGroup.get('description')?.invalid">
+                        <small class="text-danger" *ngIf="departmenFormGroup.get('description')?.errors?.['required']">Description is required.</small>
+                      </div>
                     </div>
-                </div><!--end col-->
+                  </div><!--end col-->
                 </div>
                 <button type="submit" class="btn btn-primary">Add Department</button>
-            </form>
+              </form>
+
         </div>
     </div><!--end col-->
 

@@ -3,36 +3,48 @@ import { ChatService } from './services/chat.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Message } from './models/message';
+import { AuthService } from '../../features/auth/services/auth.service';
 @Component({
-  selector: 'app-chat',
+  selector: "app-chat",
   standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule
-  ],
-  templateUrl: './chat.component.html',
-  styleUrl: './chat.component.scss'
+  imports: [FormsModule, CommonModule],
+  templateUrl: "./chat.component.html",
+  styleUrl: "./chat.component.scss"
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
   messages: Message[] = [];
-  newMessage: string = '';
+  newMessage: string = "";
+
   currentUser = {
-    id: 'user1',
-    name: 'Cristino Murphy',
-    avatar: '../assets/images/doctors/02.jpg'
+    id: "",
+    name: "",
+    avatar: "../assets/images/doctors/genderneutral.jpg"
   };
 
-  constructor(private chatService: ChatService) {}
-ngOnInit(): void {
-  this.onMessageReceive();
+  constructor(
+    private chatService: ChatService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.onMessageReceive();
+    this.getCurrentUser();
   }
 
-
-  onMessageReceive(){
+  getCurrentUser() {
+    this.currentUser.id = this.authService.getCurrentUserId();
+    this.currentUser.name = this.authService.getCurrentUserName();
+    console.log("Current User ID:", this.currentUser.id);
+    console.log("Current User Name:", this.currentUser.name);
+  }
+  onMessageReceive() {
     this.chatService.onMessageReceived((user: string, message: string) => {
       this.messages.push({
         user: user,
-        avatar: user === this.currentUser.name ? this.currentUser.avatar : '../assets/images/doctors/02.jpg',
+        avatar:
+          user === this.currentUser.name
+            ? this.currentUser.avatar
+            : "../assets/images/doctors/genderneutral.jpg",
         text: message,
         time: new Date().toLocaleTimeString()
       });
@@ -41,7 +53,7 @@ ngOnInit(): void {
   sendMessage(): void {
     if (this.newMessage.trim()) {
       this.chatService.sendMessage(this.currentUser.name, this.newMessage);
-      this.newMessage = '';
+      this.newMessage = "";
     }
   }
 }

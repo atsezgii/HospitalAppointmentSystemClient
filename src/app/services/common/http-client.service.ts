@@ -66,7 +66,7 @@ export class HttpClientService {
     else
       url = `${this.url(requsetParameters)}/soft-delete/${id}`
 
-    return this.httpClient.patch<T>(url,{headers:requsetParameters.headers})
+    return this.httpClient.delete<T>(url,{headers:requsetParameters.headers})
   }
 }
 export class RequestParameters{

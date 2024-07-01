@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { HubConnectionState } from '@microsoft/signalr';
 import { HubConnection } from '@microsoft/signalr';
-import { error } from 'console';
+
 
 @Injectable({
   providedIn: 'root'

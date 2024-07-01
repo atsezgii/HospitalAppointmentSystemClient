@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     errorCallBack?: (errorMessage: string) => void
   ) {
     if (this.registerFormGroup.valid) {
-      this.authService.create(
+      this.authService.register(
         this.registerFormGroup.value,
         successCallBack,
         errorCallBack

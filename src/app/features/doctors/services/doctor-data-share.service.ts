@@ -5,8 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DoctorDataShareService {
-
-
   private doctorSource = new BehaviorSubject<any>(null);
   currentDoctor = this.doctorSource.asObservable();
   constructor() { }

@@ -13,12 +13,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { EnumService } from '../../../../services/enums/enum.service';
 
 @Component({
-  selector: 'app-add-user',
+  selector: "app-add-user",
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [CommonModule, ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatDatepickerModule,MatIconModule],
-  templateUrl: './add-user.component.html',
-  styleUrl: './add-user.component.scss'
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatIconModule
+  ],
+  templateUrl: "./add-user.component.html",
+  styleUrl: "./add-user.component.scss"
 })
 export class AddUserComponent {
   userFormGroup: FormGroup;
@@ -28,7 +35,7 @@ export class AddUserComponent {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alertify: AlertifyService,
-    private enumService:EnumService
+    private enumService: EnumService
   ) {}
   ngOnInit(): void {
     this.createForm();
@@ -47,7 +54,7 @@ export class AddUserComponent {
       city: ["", Validators.required],
       address: ["", Validators.required],
       userType: ["", Validators.required],
-      photoUrl: ["", Validators.required],
+      photoUrl: ["", Validators.required]
     });
   }
   addUser(
@@ -55,13 +62,12 @@ export class AddUserComponent {
     errorCallBack?: (errorMessage: string) => void
   ) {
     if (this.userFormGroup.valid) {
-
       this.userService.create(
         this.userFormGroup.value,
         successCallBack,
         errorCallBack
       );
-      console.log("va", this.userFormGroup.value)
+      console.log("va", this.userFormGroup.value);
       this.alertify.message("Success", {
         dismissOthers: true,
         messageType: MessageType.Success,
@@ -94,27 +100,25 @@ export class AddUserComponent {
     }
     this.addUser();
   }
-  getGenders(){
-    this.enumService.getEnumValues('get-genders')
-    .subscribe({
-      next: (data) => {
-        console.log('Genders:', data); // Gelen veriyi konsolda kontrol edin
+  getGenders() {
+    this.enumService.getEnumValues("get-genders").subscribe({
+      next: data => {
+        console.log("Genders:", data);
         this.genders = data;
       },
-      error: (error) => {
-        console.error('Error fetching genders:', error);
+      error: error => {
+        console.error("Error fetching genders:", error);
       }
     });
   }
-  getCities(){
-    this.enumService.getEnumValues('get-cities')
-    .subscribe({
-      next: (data) => {
-        console.log('Cities:', data); // Gelen veriyi konsolda kontrol edin
+  getCities() {
+    this.enumService.getEnumValues("get-cities").subscribe({
+      next: data => {
+        console.log("Cities:", data);
         this.cities = data;
       },
-      error: (error) => {
-        console.error('Error fetching genders:', error);
+      error: error => {
+        console.error("Error fetching genders:", error);
       }
     });
   }

@@ -1,1 +1,56 @@
-<p>list-patient works!</p>
+<div class="row">
+  <div class="col-xl-9 col-lg-6 col-md-4">
+      <h5 class="mb-0">Doctors</h5>
+
+  </div><!--end col-->
+
+</div>
+
+
+<div class="row">
+  <div class="col-12 mt-4">
+      <div class="table-responsive bg-white shadow rounded">
+          <table class="table mb-0 table-center">
+              <thead>
+                  <tr>
+                      <th class="" style="min-width: 50px;">#</th>
+                      <th class="" style="min-width: 180px;">bloodType</th>
+                      <th class="" style="min-width: 150px;">insuranceType</th>
+                      <th class="">socialSecurityNumber</th>
+                      <th class="" style="min-width: 150px;">healthHistory </th>
+                      <th class="">emergencyContactName</th>
+                      <th class="">emergencyContactPhoneNumber</th>
+                      <th class="">emergencyContactRelationship</th>
+                      <th class="">isDeleted</th>
+                      <th class="" style="text-align: center;">Fees</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let patient of combinedData">
+                      <td class="p-3">{{patient.id}}</td>
+                      <td class="p-3">{{ patient.bloodTypeName }}</td>
+                      <td class="p-3">{{ patient.insuranceTypeName }}</td>
+                      <td class="p-3">{{ patient.socialSecurityNumber }}</td>
+                      <td class="p-3">{{ patient.healthHistory }}</td>
+                      <td class="p-3">{{ patient.allergies }}</td>
+                      <td class="p-3">{{ patient.currentMedications }}</td>
+                      <td class="p-3">{{ patient.emergencyContactName }}</td>
+                      <td class="p-3">{{ patient.emergencyContactPhoneNumber }}</td>
+                      <td class="p-3">{{ patient.emergencyContactRelationship }}</td>
+                      <td class="p-3">{{ patient.isDeleted }}</td>
+                      <td class="text-end p-3" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                        <!-- <a (click)="showDoctorDetails(patient)" class="btn btn-icon btn-pills btn-soft-success m-1">
+                            <i class="fas fa-pencil"></i>
+                        </a>
+                        <a (click)="showDeleteModal(patient)" class="btn btn-icon btn-pills btn-soft-danger m-1">
+                            <i class="fas fa-times-circle"></i>
+                        </a> -->
+                    </td>
+                  </tr>
+
+
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

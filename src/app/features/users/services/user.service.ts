@@ -4,13 +4,32 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UserListApiResponse } from '../models/list-user-response';
 import { UpdateUser } from '../models/update-user';
+import { CreateUser } from '../models/create-user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   constructor(private httpClientService : HttpClientService){}
+
+  create(user: CreateUser, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    this.httpClientService.post({
+        controller: "User"
+    }, user)
+    .subscribe({
+        next: (result) => {
+            if (successCallBack) {
+                successCallBack();
+                console.log("res", result)
+            }
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+            if (errorCallBack) {
+                errorCallBack(errorResponse.message);
+            }
+        }
+    });
+}
   read(pageRequest: PageRequest): Observable<UserListApiResponse> {
     return this.httpClientService.getPaging<UserListApiResponse>({ controller: 'User' }, pageRequest)
       .pipe(

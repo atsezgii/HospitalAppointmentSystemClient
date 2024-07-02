@@ -23,6 +23,9 @@ import { AddFeeedbackComponent } from './features/feedbacks/components/add-feeed
 import { OperationClaimsComponent } from './admin-components/operation-claims/operation-claims.component';
 import { UpdateOperationClaimComponent } from './features/operation-claims/components/update-operation-claim/update-operation-claim.component';
 import { AddOperationClaimComponent } from './features/operation-claims/components/add-operation-claim/add-operation-claim.component';
+import { UserOperationClaimsComponent } from './admin-components/user-operation-claims/user-operation-claims.component';
+import { AddUserClaimComponent } from './features/user-operation-claims/components/add-user-claim/add-user-claim.component';
+import { AddUserComponent } from './features/users/components/add-user/add-user.component';
 
 
 export const routes: Routes = [
@@ -46,6 +49,7 @@ export const routes: Routes = [
   {path:"chat",component:ChatComponent,canActivate: [authGuard]},
 
   {path:"users",component:UsersComponent,canActivate: [authGuard]},
+  {path:"addUser",component:AddUserComponent,canActivate: [authGuard]},
   { path:'user/:id', component: UserDetailComponent ,canActivate: [authGuard]},
 
   {path:"patients",component:PatientsComponent,canActivate: [authGuard]},
@@ -62,6 +66,10 @@ export const routes: Routes = [
   {path:"claims",component:OperationClaimsComponent,canActivate: [authGuard]},
   {path:"claim/:id",component:UpdateOperationClaimComponent,canActivate: [authGuard]},
   {path:"addClaim",component:AddOperationClaimComponent,canActivate: [authGuard]},
+
+  {path:"userclaims",component:UserOperationClaimsComponent,canActivate: [authGuard]},
+  {path:"addUserClaim",component:AddUserClaimComponent,canActivate: [authGuard]},
+  {path:"userclaim/:id",component:UserOperationClaimsComponent,canActivate: [authGuard]},
 
   ]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },// Varsayılan rota login

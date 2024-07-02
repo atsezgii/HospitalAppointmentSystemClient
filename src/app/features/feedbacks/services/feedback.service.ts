@@ -13,22 +13,18 @@ export class FeedbackService {
 
   constructor(private httpClientService : HttpClientService){}
   create(feedback: CreateFeedback, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
-    this.httpClientService.post({
-        controller: "FeedBack"
-    }, feedback)
-    .subscribe({
-        next: (result) => {
-            if (successCallBack) {
-                successCallBack();
-                console.log("res", result)
-            }
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-            if (errorCallBack) {
-                errorCallBack(errorResponse.message);
-            }
-        }
-    });
+    this.httpClientService
+      .post({ controller: "FeedBack" }, feedback)
+      .subscribe({ next: result => {
+          if (successCallBack) {
+            successCallBack();
+            console.log("res", result);
+          }
+        }, error: (errorResponse: HttpErrorResponse) => {
+          if (errorCallBack) {
+            errorCallBack(errorResponse.message);
+          }
+        } });
 }
   read(pageRequest: PageRequest): Observable<ListFeedbackResponse> {
     return this.httpClientService.getPaging<ListFeedbackResponse>({ controller: 'FeedBack' }, pageRequest)

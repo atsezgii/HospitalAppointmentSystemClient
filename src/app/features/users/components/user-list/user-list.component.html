@@ -20,7 +20,8 @@
                       <th class="border-bottom p-3">City</th>
                       <th class="border-bottom p-3">Adress</th>
                       <th class="border-bottom p-3">User Type</th>
-                      <th class="border-bottom p-3">Fees</th>
+                      <th class="border-bottom p-3">IsDeleted</th>
+                      <th class="border-bottom p-3" style="text-align: center;">Fees</th>
                   </tr>
               </thead>
               <tbody>
@@ -42,10 +43,15 @@
                       <td class="p-3">{{ user.city }}</td>
                       <td class="p-3">{{ user.address }}</td>
                       <td class="p-3">{{ user.userType }}</td>
-                      <td class=" p-3">
-                        <a (click)="showUserDetails(user)" class="btn btn-icon btn-pills btn-soft-primary"><i class="fas fa-pencil"></i></a>
-                        <a (click)="showDeleteModal(user)" class="btn btn-icon btn-pills btn-soft-danger"><i class="fas fa-times-circle"></i></a>
-                      </td>
+                      <td class="p-3">{{ user.isDeleted }}</td>
+                      <td class="text-end p-3" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                        <a (click)="showUserDetails(user)" class="btn btn-icon btn-pills btn-soft-success m-1">
+                            <i class="fas fa-pencil"></i>
+                        </a>
+                        <a (click)="showDeleteModal(user)" class="btn btn-icon btn-pills btn-soft-danger m-1">
+                            <i class="fas fa-times-circle"></i>
+                        </a>
+                    </td>
                   </tr>
 
 

@@ -5,4 +5,5 @@ export class ListDoctor{
   biography: string;
   userId: number;
   departmentId: number;
+  isDeleted: boolean;
 }

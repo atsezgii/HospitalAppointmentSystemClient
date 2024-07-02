@@ -26,6 +26,7 @@ import { AddOperationClaimComponent } from './features/operation-claims/componen
 import { UserOperationClaimsComponent } from './admin-components/user-operation-claims/user-operation-claims.component';
 import { AddUserClaimComponent } from './features/user-operation-claims/components/add-user-claim/add-user-claim.component';
 import { AddUserComponent } from './features/users/components/add-user/add-user.component';
+import { DoctorDetailComponent } from './features/doctors/components/doctor-detail/doctor-detail.component';
 
 
 export const routes: Routes = [
@@ -43,7 +44,8 @@ export const routes: Routes = [
   children:[
   {path:"",component:AdminComponent,canActivate: [authGuard]},
 
-  {path:"doctor",component:DoctorsComponent,canActivate: [authGuard]},
+  {path:"doctors",component:DoctorsComponent,canActivate: [authGuard]},
+  { path:'doctor/:id', component: DoctorDetailComponent ,canActivate: [authGuard]},
   {path:"adddoctor",component:AddDoctorComponent,canActivate: [authGuard]},
 
   {path:"chat",component:ChatComponent,canActivate: [authGuard]},

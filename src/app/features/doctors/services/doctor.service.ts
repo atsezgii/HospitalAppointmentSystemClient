@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService, PageRequest } from '../../../services/common/http-client.service';
+import { HttpClientService, PageRequest, RequestParameters } from '../../../services/common/http-client.service';
 import { CreateDoctor } from '../models/create-doctor';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ListDoctor } from '../models/list-doctor';
 import { ApiResponse } from '../models/list-doctor-response';
 import { Observable, catchError, throwError } from 'rxjs';
+import { UpdateDoctor } from '../models/update-doctor';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,19 @@ export class DoctorService {
           return throwError(() => new Error(errorMessage)); // throwError fonksiyonunu kullanarak hata fırlatma
         })
       );
+  }
+
+  updateDoctor(doctor: Partial<UpdateDoctor>): Observable<UpdateDoctor> {
+    const requestParameter: Partial<RequestParameters> = {
+      controller: 'Doctor'
+    };
+    console.log("testttt",doctor)
+    return this.httpClientService.put<UpdateDoctor>(requestParameter, doctor);
+  }
+  deleteDoctor(doctorId: number): Observable<void> {
+    const requestParameters: Partial<RequestParameters> = {
+      controller: 'Doctor'
+    };
+    return this.httpClientService.delete<void>(requestParameters, doctorId);
   }
 }

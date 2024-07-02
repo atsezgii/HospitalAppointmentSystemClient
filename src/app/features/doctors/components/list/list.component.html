@@ -18,7 +18,8 @@
                       <th class="border-bottom p-3" style="min-width: 150px;">Department</th>
                       <th class="border-bottom p-3">Biography</th>
                       <th class="border-bottom p-3" style="min-width: 150px;">Specialist Level</th>
-                      <th class="border-bottom p-3">Fees</th>
+                      <th class="border-bottom p-3">IsDeleted</th>
+                      <th class="border-bottom p-3" style="text-align: center;">Fees</th>
                   </tr>
               </thead>
               <tbody>
@@ -35,11 +36,15 @@
                       <td class="p-3">{{ doctor.departmentName }}</td>
                       <td class="p-3">{{ doctor.biography }}</td>
                       <td class="p-3">{{ doctor.specialistLevel }}</td>
-                      <td class="text-end p-3">
-                          <a href="#" class="btn btn-icon btn-pills btn-soft-primary" data-bs-toggle="modal" data-bs-target="#viewappointment"><i class="fas fa-eye"></i></a>
-                          <a href="#" class="btn btn-icon btn-pills btn-soft-success" data-bs-toggle="modal" data-bs-target="#acceptappointment"><i class="fas fa-check-circle"></i></a>
-                          <a href="#" class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment"><i class="fas fa-times-circle"></i></a>
-                      </td>
+                      <td class="p-3">{{ doctor.isDeleted }}</td>
+                      <td class="text-end p-3" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                        <a (click)="showDoctorDetails(doctor)" class="btn btn-icon btn-pills btn-soft-success m-1">
+                            <i class="fas fa-pencil"></i>
+                        </a>
+                        <a (click)="showDeleteModal(doctor)" class="btn btn-icon btn-pills btn-soft-danger m-1">
+                            <i class="fas fa-times-circle"></i>
+                        </a>
+                    </td>
                   </tr>
 
 
@@ -70,3 +75,8 @@
   <!-- PAGINATION END -->
 </div>
 <!-- pagination end -->
+<app-confirm-delete-doctor-modal
+  *ngIf="showModal"
+  (confirmed)="confirmDelete()"
+  (cancelled)="cancelDelete()"
+></app-confirm-delete-doctor-modal>

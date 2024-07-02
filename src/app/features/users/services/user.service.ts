@@ -4,7 +4,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UserListApiResponse } from '../models/list-user-response';
 import { UpdateUser } from '../models/update-user';
-import { CreateUser } from '../models/create-user';
+import { CreateUser } from '../models/add-user';
 
 @Injectable({
   providedIn: 'root'

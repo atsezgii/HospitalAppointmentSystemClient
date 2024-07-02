@@ -1,0 +1,65 @@
+<div class="layout-specing">
+  <div class="d-md-flex justify-content-between">
+    <h2 class="mb-0">Update Doctor</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-12">
+        <div class="card border-0 p-4 rounded shadow">
+            <div class="row align-items-center">
+
+              <form class="mt-4" [formGroup]="doctorDetailFormGroup"
+              (submit)="onSubmit()">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="mb-3">
+                              <label class="form-label" for="departmentId">Departments</label>
+                              <select class="form-select form-control" name="departmentId" formControlName="departmentId" id="departmentId">
+                                <!-- <option value="" disabled selected>Select a department</option> -->
+                                <option *ngFor="let department of departments" [value]="department.id">
+                                  {{ department.name }}
+                                </option>
+                              </select>
+                          </div>
+                      </div><!--end col-->
+
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="userId">User Id</label>
+                            <input formControlName="userId" id="userId" type="text" class="form-control" placeholder="User Id :">
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                          <label class="form-label" for="yearsOfExperience">Years Of Experience</label>
+                          <input formControlName="yearsOfExperience" id="yearsOfExperience" type="text" class="form-control" placeholder="Years Of Experience :">
+                      </div>
+                  </div><!--end col-->
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                          <label class="form-label" for="biography">Biography</label>
+                          <input formControlName="biography" id="biography" type="text" class="form-control" placeholder="Biography :">
+                      </div>
+                  </div><!--end col-->
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="biography">Biography</label>
+                            <input formControlName="biography" id="biography" type="text" class="form-control" placeholder="Biography :">
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                          <label class="form-label" for="specialistLevel">Specialist Level</label>
+                          <input formControlName="specialistLevel" id="specialistLevel" type="text" class="form-control" placeholder="Specialist Level :">
+                      </div>
+                  </div><!--end col-->
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Update Doctor</button>
+              </form>
+        </div>
+    </div><!--end col-->
+
+</div>
+</div>
+

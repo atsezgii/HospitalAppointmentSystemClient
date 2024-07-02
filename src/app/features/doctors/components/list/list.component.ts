@@ -10,11 +10,14 @@ import { UserService } from '../../../users/services/user.service';
 import { UserListApiResponse } from '../../../users/models/list-user-response';
 import { DepartmentService } from '../../../departments/services/department.service';
 import { ListDepartment } from '../../../departments/models/list-department';
+import { Router } from '@angular/router';
+import { DoctorDataShareService } from '../../services/doctor-data-share.service';
+import { ConfirmDeleteDoctorModalComponent } from '../confirm-delete-doctor-modal/confirm-delete-doctor-modal.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ConfirmDeleteDoctorModalComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -29,11 +32,15 @@ export class ListComponent implements OnInit, OnDestroy {
   doctorsLoaded: boolean = false;
   usersLoaded: boolean = false;
   departmentsLoaded: boolean = false;
+  showModal: boolean = false;
+  doctorsToDelete: ListDoctor | null = null;
 
   constructor(
     private doctorService: DoctorService,
     private userService: UserService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+    private router:Router,
+    private doctorShareDataService:DoctorDataShareService
   ) {}
 
   ngOnInit() {
@@ -103,7 +110,15 @@ export class ListComponent implements OnInit, OnDestroy {
     });
     console.log('Combined Data:', this.combinedData);
   }
-
+  showDoctorDetails(doctor: any) {
+    this.doctorShareDataService.changeDoctor(doctor);
+    console.log("doctor detail id", doctor.id);
+    this.router.navigate(['/admin/doctor', doctor.id]);
+  }
+  showDeleteModal(doctor: ListDoctor) {
+    this.doctorsToDelete = doctor;
+    this.showModal = true;
+  }
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -120,4 +135,25 @@ export class ListComponent implements OnInit, OnDestroy {
   getPagesArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i);
   }
+  confirmDelete() {
+    if (this.doctorsToDelete) {
+      this.doctorService.deleteDoctor(this.doctorsToDelete.id).subscribe({
+        next: () => {
+          this.doctors = this.doctors.filter(d => d.id !== this.doctorsToDelete!.id);
+          this.showModal = false;
+          this.doctorsToDelete = null;
+        },
+        error: err => {
+          console.error('Error deleting doctor:', err);
+          this.showModal = false;
+        }
+      });
+    }
+  }
+
+  cancelDelete() {
+    this.showModal = false;
+    this.doctorsToDelete = null;
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -28,15 +28,17 @@ import { EnumService } from '../../../../services/enums/enum.service';
   styleUrl: "./add-user.component.scss"
 })
 export class AddUserComponent {
-  userFormGroup: FormGroup;
+  @Input() userFormGroup: FormGroup;
   genders: any[];
   cities: any[];
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private alertify: AlertifyService,
     private enumService: EnumService
   ) {}
+
   ngOnInit(): void {
     this.createForm();
     this.getCities();

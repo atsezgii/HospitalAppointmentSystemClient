@@ -1,0 +1,87 @@
+<div class="layout-specing">
+  <div class="d-md-flex justify-content-between">
+    <h2 class="mb-0">Update Patient</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-12">
+        <div class="card border-0 p-4 rounded shadow">
+            <div class="row align-items-center">
+              <app-add-user  [userFormGroup]="userFormGroup"></app-add-user>
+              <!-- <form class="mt-4" [formGroup]="newPatientFormGroup"
+              (submit)="onFormSubmit()">
+                  <div class="row">
+                        <div class="mb-3">
+                              <label class="form-label" for="bloodType">bloodType</label>
+                              <select class="form-select form-control" name="bloodType" formControlName="bloodType" id="bloodType">
+                                <option *ngFor="let bloodType of bloodTypes" [value]="bloodType.value">
+                                  {{ bloodType.name }}
+                                </option>
+                              </select>
+                          </div>
+                          <div class="mb-3">
+                            <label class="form-label" for="insuranceType">insuranceType</label>
+                            <select class="form-select form-control" name="insuranceType" formControlName="insuranceType" id="insuranceType">
+                              <option *ngFor="let insuranceType of insuranceTypes" [value]="insuranceType.value">
+                                {{ insuranceType.name }}
+                              </option>
+                            </select>
+                        </div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="userId">User Id</label>
+                            <input formControlName="userId" id="userId" type="text" class="form-control" placeholder="User Id :">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                          <label class="form-label" for="socialSecurityNumber">socialSecurityNumber</label>
+                          <input formControlName="socialSecurityNumber" id="socialSecurityNumber" type="text" class="form-control" placeholder="socialSecurityNumber :">
+                      </div>
+                  </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                          <label class="form-label" for="allergies">allergies</label>
+                          <input formControlName="allergies" id="allergies" type="text" class="form-control" placeholder="allergies :">
+                      </div>
+                  </div>
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="healthHistory">healthHistory</label>
+                            <input formControlName="healthHistory" id="healthHistory" type="text" class="form-control" placeholder="healthHistory :">
+                        </div>
+                    </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="currentMedications">currentMedications</label>
+                        <input formControlName="currentMedications" id="currentMedications" type="text" class="form-control" placeholder="currentMedications :">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                      <label class="form-label" for="emergencyContactName">emergencyContactName</label>
+                      <input formControlName="emergencyContactName" id="emergencyContactName" type="text" class="form-control" placeholder="emergencyContactName :">
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label" for="emergencyContactPhoneNumber">emergencyContactPhoneNumber</label>
+                    <input formControlName="emergencyContactPhoneNumber" id="emergencyContactPhoneNumber" type="text" class="form-control" placeholder="emergencyContactPhoneNumber :">
+                </div>
+            </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+                <label class="form-label" for="emergencyContactRelationship">emergencyContactRelationship</label>
+                <input formControlName="emergencyContactRelationship" id="emergencyContactRelationship" type="text" class="form-control" placeholder="emergencyContactRelationship :">
+            </div>
+        </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary">Add Patient</button>
+              </form> -->
+        </div>
+    </div>
+
+</div>
+</div>
+

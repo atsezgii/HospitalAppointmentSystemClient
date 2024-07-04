@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EnumService {
-  private apiUrl = 'https://localhost:7144/api/Enum';
+  private apiUrl = 'https://localhost:44317/api/Enum';
   constructor(private http: HttpClient) { }
 
   getEnumValues(enumType: string): Observable<any[]> {

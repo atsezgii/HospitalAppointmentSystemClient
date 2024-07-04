@@ -29,6 +29,9 @@ import { AddUserComponent } from './features/users/components/add-user/add-user.
 import { DoctorDetailComponent } from './features/doctors/components/doctor-detail/doctor-detail.component';
 import { UpdatePatientComponent } from './features/patients/components/update-patient/update-patient.component';
 import { AddPatientComponent } from './features/patients/components/add-patient/add-patient.component';
+import { DoctorLayoutComponent } from './layout/doctor-layout/doctor-layout.component';
+import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
+import { DoctorScheduleComponent } from './features/doctor-features/doctor-schedule/doctor-schedule.component';
 
 
 export const routes: Routes = [
@@ -40,7 +43,12 @@ export const routes: Routes = [
   {path:"",component:HomeComponent,canActivate: [authGuard]}
   ]},
 
+  {path:"doctor",component:DoctorLayoutComponent,
+    children: [
+    {path:"",component:DoctorDashboardComponent,canActivate: [authGuard]},
+  {path:"schedule",component:DoctorScheduleComponent,canActivate: [authGuard]},
 
+    ]},
 
   {path:"admin",component:AdminLayoutComponent,
   children:[

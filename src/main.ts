@@ -12,8 +12,8 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(withInterceptors([jwtInterceptor])),
 
-    { provide: 'baseUrl', useValue: 'https://localhost:7144/api' },  // Add the base URL here
-    { provide: appConfig, useValue: 'https://localhost:7144/api' },
+    { provide: 'baseUrl', useValue: 'https://localhost:44317/api' },  // Add the base URL here
+    { provide: appConfig, useValue: 'https://localhost:44317/api' },
     HttpClientService,
     appRouterProviders,
     provideAnimations(),

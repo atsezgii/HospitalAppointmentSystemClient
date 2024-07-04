@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { SidebarComponent } from '../../../layout/doctor-layout/components/sidebar/sidebar.component';
 import { CalendarOptions } from '@fullcalendar/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -14,46 +14,87 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClient } from '@angular/common/http';
+import { PageRequest } from '../../../services/common/http-client.service';
+import { DoctorScheduleService } from './services/doctor-schedule.service';
+import { Position } from '../../../services/alertify/enums/Position';
+import { MessageType } from '../../../services/alertify/enums/MessageType';
+import { AlertifyService } from '../../../services/alertify/alertify.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: "app-doctor-schedule",
   standalone: true,
-  imports: [
-    SidebarComponent,
-    FormsModule,
-    CommonModule,
-    FullCalendarModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatIconModule,
-    MatNativeDateModule,
-    MatButtonModule,
-  ],
+  imports: [SidebarComponent, CommonModule, FormsModule],
   templateUrl: "./doctor-schedule.component.html",
   styleUrls: ["./doctor-schedule.component.scss"]
 })
-export class DoctorScheduleComponent {
+export class DoctorScheduleComponent implements OnInit {
+  newDoctorScheduleFormGroup: FormGroup;
+  pageRequest: PageRequest = { page: 0, size: 20 };
+  count: number = 0;
+  userName:string;
   startTime: string;
   endTime: string;
   doctorId: number = 2;
-  intervalInMinutes: number =15;
+  intervalInMinutes: number = 15;
+  minDateTime: string;
+  maxDateTime: string;
+  constructor(
+    private authService:AuthService,
+    private formBuilder: FormBuilder,
+    private doctorScheduleService: DoctorScheduleService,
+    private alertify:AlertifyService
+  ) {}
 
-  constructor(private http: HttpClient) {}
+  ngOnInit(): void {
+    this.userName = this.authService.getCurrentUserName();
+    const now = new Date();
+    const today = now.toISOString().slice(0, 10); // 'YYYY-MM-DD' formatında bugünün tarihi
+    this.minDateTime = `${today}T00:00`; // Bugünün başlangıç saati
+    this.maxDateTime = `${today}T23:59`; // Bugünün bitiş saati
+    this.createForm();
+  }
 
-  onSubmit() {
-
-    const payload = {
-      doctorId: this.doctorId,
-      startTime: new Date(this.startTime).toISOString(),
-      endTime: new Date(this.endTime).toISOString(),
-      intervalInMinutes:this.intervalInMinutes
-    };
-    console.log('API response:', payload);
-
-    this.http.post('https://localhost:44317/api/DoctorAvailability', payload).subscribe(response => {
-      console.log('API response:', response);
+  private createForm() {
+    this.newDoctorScheduleFormGroup = this.formBuilder.group({
+      doctorId: ["", [Validators.required]],
+      startTime: ["", [Validators.required]],
+      endTime: ["", [Validators.required]],
+      intervalInMinutes: ["", [Validators.required]]
     });
   }
+  addDoctorSchedule(payload:any) {
+    if (payload) {
+      this.doctorScheduleService.create(
+        payload,
+      );
+      console.log("va", this.newDoctorScheduleFormGroup.value);
+      this.alertify.message("Success", {
+        dismissOthers: true,
+        messageType: MessageType.Success,
+        position: Position.TopRight
+      });
+      this.newDoctorScheduleFormGroup.reset();
+    } else {
+      this.alertify.message("Form is not valid", {
+        dismissOthers: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
+      });
+    }
+  }
+  onSubmit() {
+    const payload = {
+      doctorId: Number(this.authService.getCurrentUserId()),
+      startTime: new Date(this.startTime).toISOString(),
+      endTime: new Date(this.endTime).toISOString(),
+      intervalInMinutes: this.intervalInMinutes
+    };
+    this.addDoctorSchedule(payload);
+    console.log("Start Time:", payload);
+
+  }
+
+
+
 }

@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ListPatientResponse } from '../models/list-patient-response';
 import { Observable, catchError, throwError } from 'rxjs';
 import { UpdatePatient } from '../models/update-patient';
+import { ListPatient } from '../models/list-patient';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,18 @@ export class PatientService {
       controller: 'Patient'
     };
     return this.httpClientService.delete<void>(requestParameters, patientId);
+  }
+  getAllPatients(): Observable<ListPatientResponse> {
+    const requestParameters: Partial<RequestParameters> = {
+      controller: 'Patient',
+    };
+    return this.httpClientService.get<ListPatientResponse>(requestParameters)
+      .pipe(
+        catchError((errorResponse: HttpErrorResponse) => {
+          const errorMessage = errorResponse && errorResponse.message ? errorResponse.message : 'Bilinmeyen hata';
+          return throwError(() => new Error(errorMessage));
+        })
+      );
   }
 
 }

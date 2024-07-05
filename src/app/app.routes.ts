@@ -32,6 +32,7 @@ import { AddPatientComponent } from './features/patients/components/add-patient/
 import { DoctorLayoutComponent } from './layout/doctor-layout/doctor-layout.component';
 import { DoctorDashboardComponent } from './doctor-dashboard/doctor-dashboard.component';
 import { DoctorScheduleComponent } from './features/doctor-features/doctor-schedule/doctor-schedule.component';
+import { PatientProfileComponent } from './features/patient-features/patient-profile/components/patient-profile/patient-profile.component';
 
 
 export const routes: Routes = [
@@ -40,7 +41,8 @@ export const routes: Routes = [
 
   {path:"patient",component:MainLayoutComponent,
   children: [
-  {path:"",component:HomeComponent,canActivate: [authGuard]}
+  {path:"",component:HomeComponent,canActivate: [authGuard]},
+  {path:"profile",component:PatientProfileComponent,canActivate: [authGuard]}
   ]},
 
   {path:"doctor",component:DoctorLayoutComponent,

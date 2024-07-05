@@ -113,7 +113,7 @@ export class UpdatePatientComponent implements  OnInit{
       },
       error => {
         console.error('patient could not be updated:', error);
-        this.alertify.message("Form is not valid", {
+        this.alertify.message("Authorization Exception", {
           dismissOthers: true,
           messageType: MessageType.Error,
           position: Position.TopRight

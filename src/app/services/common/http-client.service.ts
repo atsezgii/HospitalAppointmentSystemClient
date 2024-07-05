@@ -13,7 +13,7 @@ export class HttpClientService {
   private url(requestParameter: Partial<RequestParameters>): string {
     return `${requestParameter.baseUrl ? requestParameter.baseUrl : this.baseUrl}/${requestParameter.controller}${requestParameter.action ? `/${requestParameter.action}` : ""}`;
   }
-  get<T>(requsetParameters:Partial<RequestParameters>, id?: string) : Observable<T>{
+  get<T>(requsetParameters:Partial<RequestParameters>, id?: number) : Observable<T>{
     let url : string = "";
     if(requsetParameters.fullEndPoint)
       url = requsetParameters.fullEndPoint
@@ -68,6 +68,7 @@ export class HttpClientService {
 
     return this.httpClient.delete<T>(url,{headers:requsetParameters.headers})
   }
+
 }
 export class RequestParameters{
 controller?:string;

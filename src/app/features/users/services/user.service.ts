@@ -5,6 +5,8 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { UserListApiResponse } from '../models/list-user-response';
 import { UpdateUser } from '../models/update-user';
 import { CreateUser } from '../models/add-user';
+import { ListUser } from '../models/list-user';
+import { ListPatient } from '../../patients/models/list-patient';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +54,19 @@ export class UserService {
     };
     console.log("userid from service", userId)
     return this.httpClientService.delete<void>(requestParameters, userId);
+  }
+
+  getUser(id: number): Observable<ListUser> {
+    const requestParameters: Partial<RequestParameters> = {
+      controller: 'User',
+    };
+    return this.httpClientService.get<ListUser>(requestParameters, id)
+      .pipe(
+        catchError((errorResponse: HttpErrorResponse) => {
+          const errorMessage = errorResponse && errorResponse.message ? errorResponse.message : 'Unknown error';
+          return throwError(() => new Error(errorMessage));
+        })
+      );
   }
 
 

@@ -108,7 +108,8 @@ export class ListComponent implements OnInit, OnDestroy {
         departmentName: department ? department.name : 'Unknown'
       };
     });
-    console.log('Combined Data:', this.combinedData);
+    this.doctorShareDataService.changeCombinedDoctorData(this.combinedData);
+    console.log('Combined Data:', this.combinedData)
   }
   showDoctorDetails(doctor: any) {
     this.doctorShareDataService.changeDoctor(doctor);

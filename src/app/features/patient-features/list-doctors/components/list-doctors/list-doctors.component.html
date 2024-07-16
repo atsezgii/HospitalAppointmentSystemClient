@@ -6,16 +6,17 @@
           <h3 class="sub-title mb-4">Doctors</h3>
 
       </div>
+
   </div><!--end col-->
       <div class="row">
           <div *ngFor="let doctor of combinedData"  class="col-xl-3 col-lg-3 col-md-6">
               <div class="card team border-0 rounded shadow overflow-hidden">
                   <div class="team-img position-relative">
-                      <img src="../assets/images/doctors/01.jpg" class="img-fluid" alt="">
+                      <img [src]="doctor.photoUrl" class="img-fluid" alt="{{ doctor.userName }}">
                   </div>
                   <div class="card-body content text-center">
-                      <a href="#" class="title text-dark h5 d-block mb-0">Calvin Carlo</a>
-                      <small class="text-muted speciality">Eye Care</small>
+                      <a href="#" class="title text-dark h5 d-block mb-0">{{doctor.userName}}</a>
+                      <small class="text-muted speciality">{{doctor.departmentName}}</small>
                   </div>
               </div>
           </div><!--end col-->

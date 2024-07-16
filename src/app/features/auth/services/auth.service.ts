@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../../../services/common/http-client.service';
+import { HttpClientService, RequestParameters } from '../../../services/common/http-client.service';
 import { RegisterUser } from '../register/models/register-user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginUser } from '../login/models/login';
 import { Observable, BehaviorSubject, tap, Subscription, interval } from 'rxjs';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '../../../services/common/jwt-helper.service';
+import { ChangePassword } from '../change-password/models/change-password';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,13 @@ export class AuthService {
     );
   }
 
+  changePassword(changePassword: Partial<ChangePassword>): Observable<ChangePassword> {
+    const requestParameter: Partial<RequestParameters> = {
+      controller: 'Auth/ChangePassword'
+    };
+    console.log("testttt",changePassword)
+    return this.httpClientService.put<ChangePassword>(requestParameter, changePassword);
+  }
   getCurrentUserId(): string | null {
     const token = localStorage.getItem('token');
     return token ? this.jwtHelper.getUserId(token) : null;

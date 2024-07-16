@@ -6,7 +6,6 @@
 
 </div>
 
-
 <div class="row">
   <div class="col-12 mt-4">
       <div class="table-responsive bg-white shadow rounded">
@@ -28,7 +27,7 @@
                       <td class="p-3">
                           <a href="#" class="text-dark">
                               <div class="d-flex align-items-center">
-                                  <img src="../assets/images/client/01.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                  <img [src]="doctor.photoUrl" class="avatar avatar-md-sm rounded-circle shadow" alt="{{doctor.departmentName}}">
                                   <span class="ms-2">{{doctor.userName}}</span>
                               </div>
                           </a>
@@ -80,3 +79,4 @@
   (confirmed)="confirmDelete()"
   (cancelled)="cancelDelete()"
 ></app-confirm-delete-doctor-modal>
+

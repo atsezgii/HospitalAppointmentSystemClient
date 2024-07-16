@@ -33,6 +33,11 @@ export class JwtHelperService {
     expirationDate.setUTCSeconds(decodedToken.exp);
     return expirationDate < new Date(); // exp ile şu anki zaman karşılaştırılır
   }
+  getUserData(token: string): string | null { //for user typee
+    const decodedToken = this.decodeToken(token);
+    console.log("userdata", decodedToken ? decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"] : null)
+    return decodedToken ? decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/userdata"] : null;
+  }
   getTokenExpirationDate(token: string): Date | null {
     const decodedToken = this.decodeToken(token);
     if (!decodedToken || !decodedToken.exp) {

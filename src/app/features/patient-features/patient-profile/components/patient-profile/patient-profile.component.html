@@ -58,7 +58,7 @@
 
 
                   <li class="nav-item" role="presentation">
-                      <a class="nav-link rounded-0 active" id="experience-tab" data-bs-toggle="pill" href="#pills-experience" role="tab" aria-controls="pills-experience" aria-selected="true">
+                      <a class="nav-link rounded-0 active" id="experience-tab" data-bs-toggle="pill" role="tab" aria-controls="pills-experience" aria-selected="true">
                           <div class="text-center pt-1 pb-1">
                               <h4 class="title fw-normal mb-0">Profile Settings</h4>
                           </div>
@@ -72,83 +72,83 @@
                   <div class="tab-pane fade active show" id="pills-experience" role="tabpanel" aria-labelledby="experience-tab">
                       <h5 class="mb-0">Personal Information :</h5>
 
-
-                      <form class="mt-4">
+                      <form class="mt-4" [formGroup]="patientDetailFormGroup"
+                      (submit)="onSubmit()">
                           <div class="row">
-                              <div class="col-lg-6">
-                                  <div class="mb-3">
-                                      <label class="form-label">First Name</label>
-                                      <input name="name" id="name" type="text" class="form-control" placeholder="First Name :">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                      <label class="form-label" for="bloodType">Blood Type</label>
+                                      <select class="form-select form-control" name="bloodType" formControlName="bloodType" id="bloodType">
+                                        <!-- <option value="" disabled selected>Select a department</option> -->
+                                        <option *ngFor="let bloodType of bloodTypes" [value]="bloodType.value">
+                                          {{ bloodType.name }}
+                                        </option>
+                                      </select>
                                   </div>
-                              </div><!--end col-->
-
-                              <div class="col-lg-6">
+                                </div>
+                                <div class="col-md-6">
                                   <div class="mb-3">
-                                      <label class="form-label">Last Name</label>
-                                      <input name="name" id="name2" type="text" class="form-control" placeholder="Last Name :">
-                                  </div>
-                              </div><!--end col-->
-
-                              <div class="col-lg-6">
-                                  <div class="mb-3">
-                                      <label class="form-label">Your Email</label>
-                                      <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
-                                  </div>
-                              </div><!--end col-->
-
-                              <div class="col-lg-6">
-                                  <div class="mb-3">
-                                      <label class="form-label">Phone no.</label>
-                                      <input name="number" id="number" type="text" class="form-control" placeholder="Phone no. :">
-                                  </div>
-                              </div><!--end col-->
-
-                              <div class="col-md-12">
-                                  <div class="mb-3">
-                                      <label class="form-label">Your Bio Here</label>
-                                      <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Bio :"></textarea>
-                                  </div>
+                                    <label class="form-label" for="insuranceType">Insurance Type</label>
+                                    <select class="form-select form-control" name="insuranceType" formControlName="insuranceType" id="insuranceType">
+                                      <!-- <option value="" disabled selected>Select a department</option> -->
+                                      <option *ngFor="let insuranceType of insuranceTypes" [value]="insuranceType.value">
+                                        {{ insuranceType.name }}
+                                      </option>
+                                    </select>
+                                </div>
                               </div>
-                          </div><!--end row-->
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                  <label class="form-label" for="socialSecurityNumber">Social Security Number</label>
+                                  <input formControlName="socialSecurityNumber" id="socialSecurityNumber" type="text" class="form-control" placeholder="Social Security Number :">
+                              </div>
+                          </div><!--end col-->
+                            <div class="col-md-6">
+                              <div class="mb-3">
+                                  <label class="form-label" for="allergies">Allergies</label>
+                                  <input formControlName="allergies" id="allergies" type="text" class="form-control" placeholder="Allergies :">
+                              </div>
+                          </div><!--end col-->
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label" for="healthHistory">Health History</label>
+                                    <textarea formControlName="healthHistory" id="healthHistory" type="text" class="form-control" placeholder="Health History :"></textarea>
+                                </div>
+                            </div><!--end col-->
+                          <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label" for="currentMedications">Current Medications</label>
+                                <textarea formControlName="currentMedications" id="currentMedications" type="text" class="form-control" placeholder="Current Medications :"></textarea>
+                            </div>
+                        </div><!--end col-->
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                              <label class="form-label" for="emergencyContactName">Emergency Contact Name</label>
+                              <input formControlName="emergencyContactName" id="emergencyContactName" type="text" class="form-control" placeholder="Emergency Contac tName :">
+                          </div>
+                      </div><!--end col-->
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label" for="emergencyContactPhoneNumber">Emergency Contact Phone Number</label>
+                            <input formControlName="emergencyContactPhoneNumber" id="emergencyContactPhoneNumber" type="text" class="form-control" placeholder="emergencyContactPhoneNumber :">
+                        </div>
+                    </div><!--end col-->
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label" for="emergencyContactRelationship">Emergency Contact Relationship</label>
+                        <input formControlName="emergencyContactRelationship" id="emergencyContactRelationship" type="text" class="form-control" placeholder="Emergency Contact Relationship :">
+                    </div>
+                </div><!--end col-->
+                          </div>
 
-                          <div class="row">
-                              <div class="col-sm-12">
-                                  <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
-                              </div><!--end col-->
-                          </div><!--end row-->
-                      </form><!--end form-->
+                          <button type="submit" class="btn btn-primary">Update Patient</button>
+                      </form>
+
 
                       <div class="mt-4 pt-2">
                           <h5 class="mb-0">Change Password :</h5>
 
-                          <form class="mt-4">
-                              <div class="row">
-                                  <div class="col-lg-12">
-                                      <div class="mb-3">
-                                          <label class="form-label">Old password :</label>
-                                          <input type="password" class="form-control" placeholder="Old password" required="">
-                                      </div>
-                                  </div><!--end col-->
-
-                                  <div class="col-lg-12">
-                                      <div class="mb-3">
-                                          <label class="form-label">New password :</label>
-                                          <input type="password" class="form-control" placeholder="New password" required="">
-                                      </div>
-                                  </div><!--end col-->
-
-                                  <div class="col-lg-12">
-                                      <div class="mb-3">
-                                          <label class="form-label">Re-type New password :</label>
-                                          <input type="password" class="form-control" placeholder="Re-type New password" required="">
-                                      </div>
-                                  </div><!--end col-->
-
-                                  <div class="col-lg-12 mt-2 mb-0">
-                                      <button class="btn btn-primary">Save password</button>
-                                  </div><!--end col-->
-                              </div><!--end row-->
-                          </form>
+<app-change-password></app-change-password>
                       </div>
 
                   </div>

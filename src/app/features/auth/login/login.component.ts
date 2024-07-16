@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { AlertifyService } from '../../../services/alertify/alertify.service';
 import { MessageType } from '../../../services/alertify/enums/MessageType';
 import { Position } from '../../../services/alertify/enums/Position';
+import { JwtHelperService } from '../../../services/common/jwt-helper.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,9 @@ import { Position } from '../../../services/alertify/enums/Position';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private authService:AuthService,private alertify:AlertifyService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder,private jwtService:JwtHelperService,  private authService:AuthService,private alertify:AlertifyService, private router: Router) {}
 
+  userType : string;
   loginFormGroup: FormGroup;
 
   ngOnInit(): void {
@@ -27,10 +29,7 @@ export class LoginComponent implements OnInit {
       email: ["", [Validators.required]],
       password: ["", [Validators.required]]
     });  }
-userLogin(
-  successCallBack?: () => void,
-  errorCallBack?: (errorMessage: string) => void
-) {
+userLogin() {
   if (this.loginFormGroup.valid) {
     this.authService.login(this.loginFormGroup.value).subscribe({
       next: (result) => {
@@ -42,12 +41,18 @@ userLogin(
 
         localStorage.setItem("token", result.token);
         localStorage.setItem("date", result.expiration);
+        this.userType = this.jwtService.getUserData(localStorage.getItem("token"));
+        console.log("result",this.userType)
 
         this.loginFormGroup.reset();
-        this.router.navigate(['/admin']);
-
-        if (successCallBack) {
-          successCallBack();
+        if(this.userType=="patient"){
+           this.router.navigate(['/patient'])
+        }
+        else if(this.userType=="doctor"){
+           this.router.navigate(['/doctor'])
+        }
+        else if(this.userType=="admin"){
+          this.router.navigate(['/admin'])
         }
       },
       error: (errorResponse) => {
@@ -56,10 +61,6 @@ userLogin(
           messageType: MessageType.Error,
           position: Position.TopRight
         });
-
-        if (errorCallBack) {
-          errorCallBack(errorResponse.message);
-        }
       }
     });
   } else {
@@ -69,9 +70,7 @@ userLogin(
       position: Position.TopRight
     });
 
-    if (errorCallBack) {
-      errorCallBack("Form is not valid");
-    }
+
   }
 }
 

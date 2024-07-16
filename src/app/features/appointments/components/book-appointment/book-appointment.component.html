@@ -1,0 +1,28 @@
+<div class="container">
+  <h2>Randevu Al</h2>
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="department">Departman</label>
+      <select id="department" formControlName="department" class="form-control" (change)="onDepartmentChange($event)">
+        <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="doctors.length > 0">
+      <label for="doctor">Doktor</label>
+      <select id="doctor" formControlName="doctor" class="form-control" (change)="onDoctorChange($event)">
+        <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="timeSlots.length > 0">
+      <label for="date">Tarih</label>
+      <input type="date" id="date" formControlName="date" class="form-control" (change)="onDateChange($event)" />
+    </div>
+    <div class="form-group" *ngIf="availableTimes.length > 0">
+      <label for="time">Saat</label>
+      <select id="time" formControlName="time" class="form-control">
+        <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Randevu Al</button>
+  </form>
+</div>

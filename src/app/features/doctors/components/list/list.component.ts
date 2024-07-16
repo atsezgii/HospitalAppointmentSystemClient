@@ -13,11 +13,12 @@ import { ListDepartment } from '../../../departments/models/list-department';
 import { Router } from '@angular/router';
 import { DoctorDataShareService } from '../../services/doctor-data-share.service';
 import { ConfirmDeleteDoctorModalComponent } from '../confirm-delete-doctor-modal/confirm-delete-doctor-modal.component';
+import { ListDoctorsComponent } from '../../../patient-features/list-doctors/components/list-doctors/list-doctors.component';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule,ConfirmDeleteDoctorModalComponent],
+  imports: [CommonModule,ConfirmDeleteDoctorModalComponent,ListDoctorsComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss'
 })
@@ -105,6 +106,7 @@ export class ListComponent implements OnInit, OnDestroy {
       return {
         ...doctor,
         userName: user ? `${user.firstName} ${user.lastName}` : 'Unknown',
+        photoUrl : user ? `${user.photoUrl}` : '../assets/images/doctors/01.jpg',
         departmentName: department ? department.name : 'Unknown'
       };
     });

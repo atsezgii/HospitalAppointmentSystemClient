@@ -16,11 +16,12 @@ import { ListDepartment } from '../../../../departments/models/list-department';
 import { DepartmentService } from '../../../../departments/services/department.service';
 import { MessageType } from '../../../../../services/alertify/enums/MessageType';
 import { Position } from '../../../../../services/alertify/enums/Position';
+import { ChangePasswordComponent } from '../../../../auth/change-password/change-password/change-password.component';
 
 @Component({
   selector: 'app-doctor-profile',
   standalone: true,
-  imports: [SidebarComponent, ReactiveFormsModule, CommonModule],
+  imports: [SidebarComponent, ReactiveFormsModule, CommonModule,ChangePasswordComponent],
   templateUrl: './doctor-profile.component.html',
   styleUrls: ['./doctor-profile.component.scss']
 })

@@ -10,74 +10,51 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
   styleUrl: './book-appointment.component.scss'
 })
 export class BookAppointmentComponent implements OnInit {
-  appointmentForm: FormGroup;
-  departments = [
-    { id: 1, name: 'Kardiyoloji' },
-    { id: 2, name: 'Ortopedi' },
-    { id: 3, name: 'Dermatoloji' }
+  dates = [
+    '17.07.2024 - Çarşamba',
+    '18.07.2024 - Perşembe',
+    '19.07.2024 - Cuma',
+    '22.07.2024 - Pazartesi',
+    '23.07.2024 - Salı'
   ];
-  doctors = [];
-  timeSlots = [];
-  availableTimes = [];
+  selectedDate = this.dates[0];
+  selectedTime: string | null = null;
 
-  constructor(private fb: FormBuilder) {
-    this.appointmentForm = this.fb.group({
-      department: ['', Validators.required],
-      doctor: ['', Validators.required],
-      date: ['', Validators.required],
-      time: ['', Validators.required]
-    });
+  timeSlots = [
+    {
+      hour: '09:00',
+      times: [
+        { time: '09:00', disabled: false },
+        { time: '09:10', disabled: false },
+        { time: '09:20', disabled: false },
+        { time: '09:30', disabled: false },
+        { time: '09:40', disabled: true },
+        { time: '09:50', disabled: false }
+      ]
+    },
+    {
+      hour: '10:00',
+      times: [
+        { time: '10:00', disabled: false },
+        { time: '10:10', disabled: true },
+        { time: '10:20', disabled: false },
+        { time: '10:30', disabled: false },
+        { time: '10:40', disabled: false },
+        { time: '10:50', disabled: false }
+      ]
+    },
+    // Diğer saat gruplarını burada ekleyin
+  ];
+
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  selectDate(date: string): void {
+    this.selectedDate = date;
   }
 
-  ngOnInit(): void {}
-
-  onDepartmentChange(event: Event): void {
-    const departmentId = (event.target as HTMLSelectElement).value;
-    if (departmentId === '1') {
-      this.doctors = [
-        { id: 1, name: 'Dr. Ahmet Yılmaz' },
-        { id: 2, name: 'Dr. Ayşe Demir' }
-      ];
-    } else if (departmentId === '2') {
-      this.doctors = [
-        { id: 3, name: 'Dr. Mehmet Öz' },
-        { id: 4, name: 'Dr. Canan Karatay' }
-      ];
-    } else if (departmentId === '3') {
-      this.doctors = [
-        { id: 5, name: 'Dr. Serkan Aktaş' },
-        { id: 6, name: 'Dr. Banu Kutlu' }
-      ];
-    }
-  }
-
-  onDoctorChange(event: Event): void {
-    const doctorId = (event.target as HTMLSelectElement).value;
-    if (doctorId === '1' || doctorId === '2') {
-      this.timeSlots = ['2024-07-18', '2024-07-19', '2024-07-20'];
-    } else if (doctorId === '3' || doctorId === '4') {
-      this.timeSlots = ['2024-07-21', '2024-07-22', '2024-07-23'];
-    } else if (doctorId === '5' || doctorId === '6') {
-      this.timeSlots = ['2024-07-24', '2024-07-25', '2024-07-26'];
-    }
-    this.availableTimes = [];
-  }
-
-  onDateChange(event: Event): void {
-    const selectedDate = (event.target as HTMLInputElement).value;
-    if (this.timeSlots.includes(selectedDate)) {
-      this.availableTimes = ['16:00', '16:30', '17:00'];
-    } else {
-      this.availableTimes = [];
-    }
-  }
-
-  onSubmit(): void {
-    if (this.appointmentForm.valid) {
-      console.log(this.appointmentForm.value);
-      // Burada form verilerini API'ye gönderebilirsiniz.
-    } else {
-      alert('Lütfen tüm alanları doldurun.');
-    }
+  selectTime(time: string): void {
+    this.selectedTime = time;
   }
 }

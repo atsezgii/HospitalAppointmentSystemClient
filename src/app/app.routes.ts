@@ -38,6 +38,7 @@ import { ListDepartmentsComponent } from './features/patient-features/list-depar
 import { ContactComponent } from './features/patient-features/contact/contact/contact.component';
 import { ChangePasswordComponent } from './features/auth/change-password/change-password/change-password.component';
 import { BookAppointmentComponent } from './features/appointments/components/book-appointment/book-appointment.component';
+import { DoctorProfileComponent } from './features/doctor-features/doctor-profile/components/doctor-profile/doctor-profile.component';
 
 
 export const routes: Routes = [
@@ -58,6 +59,7 @@ export const routes: Routes = [
     children: [
     {path:"",component:DoctorDashboardComponent,canActivate: [authGuard]},
   {path:"schedule",component:DoctorScheduleComponent,canActivate: [authGuard]},
+  {path:"profile",component:DoctorProfileComponent,canActivate: [authGuard]},
 
     ]},
 

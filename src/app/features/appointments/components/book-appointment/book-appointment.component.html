@@ -1,28 +1,42 @@
 <div class="container">
-  <h2>Randevu Al</h2>
-  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="department">Departman</label>
-      <select id="department" formControlName="department" class="form-control" (change)="onDepartmentChange($event)">
-        <option *ngFor="let department of departments" [value]="department.id">{{ department.name }}</option>
-      </select>
+  <div class="header">
+    <button class="back-button">&lt; Geri</button>
+    <h2>Randevu Al</h2>
+    <button class="forward-button">İleri &gt;</button>
+    <button class="book-button">Book Appointment</button>
+  </div>
+
+  <div class="doctor-info">
+    <span>Hekim: ZAHİDE ÇELİK <span class="star">⭐</span></span>
+  </div>
+
+  <div class="date-tabs">
+    <div
+      class="date-tab"
+      *ngFor="let date of dates"
+      [class.active]="date === selectedDate"
+      (click)="selectDate(date)">
+      {{ date }}
     </div>
-    <div class="form-group" *ngIf="doctors.length > 0">
-      <label for="doctor">Doktor</label>
-      <select id="doctor" formControlName="doctor" class="form-control" (change)="onDoctorChange($event)">
-        <option *ngFor="let doctor of doctors" [value]="doctor.id">{{ doctor.name }}</option>
-      </select>
+  </div>
+
+  <div class="location-info">
+    Muayene Yeri: (MABEK) KONTEYNER DAHİLİYE POL MALATYA BEYDAĞI KONAKLAMA TESİSİ
+  </div>
+
+  <div class="time-slots">
+    <div class="time-slot-group" *ngFor="let slot of timeSlots">
+      <div class="time-slot-header">{{ slot.hour }}</div>
+      <div class="time-slot-buttons">
+        <button
+          class="time-slot-button"
+          *ngFor="let time of slot.times"
+          [class.selected]="time.time === selectedTime"
+          [disabled]="time.disabled"
+          (click)="selectTime(time.time)">
+          {{ time.time }}
+        </button>
+      </div>
     </div>
-    <div class="form-group" *ngIf="timeSlots.length > 0">
-      <label for="date">Tarih</label>
-      <input type="date" id="date" formControlName="date" class="form-control" (change)="onDateChange($event)" />
-    </div>
-    <div class="form-group" *ngIf="availableTimes.length > 0">
-      <label for="time">Saat</label>
-      <select id="time" formControlName="time" class="form-control">
-        <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Randevu Al</button>
-  </form>
+  </div>
 </div>

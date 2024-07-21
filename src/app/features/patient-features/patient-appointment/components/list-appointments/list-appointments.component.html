@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      Randevu Geçmişi Listesi
+    </div>
+    <div class="card-body">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="randevularim-tab" data-bs-toggle="tab" href="#randevularim" role="tab" aria-controls="randevularim" aria-selected="true">Randevularım</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="gecmis-randevularim-tab" data-bs-toggle="tab" href="#gecmis-randevularim" role="tab" aria-controls="gecmis-randevularim" aria-selected="false">Geçmiş Randevularım</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="randevularim" role="tabpanel" aria-labelledby="randevularim-tab">
+          <div class="list-group mt-3">
+            <div class="list-group-item">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><i class="bi bi-calendar-date"></i> 24.07.2024 13:20</h5>
+                <small><span class="badge bg-info text-dark">Aktif Randevu</span></small>
+              </div>
+              <p class="mb-1 text-danger">Randevunuzun Onay Zamanı Henüz Gelmemiştir</p>
+              <p class="mb-1"><i class="bi bi-hospital"></i> İSTANBUL-(AVRUPA)-ARNAVUTKÖY DEVLET HASTANESİ</p>
+              <p class="mb-1"><i class="bi bi-person"></i> Dahiliye - Yakup Aydoğan</p>
+              <p class="mb-1"><i class="bi bi-stethoscope"></i> Muayene</p>
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-danger btn-sm me-2"><i class="bi bi-x"></i></button>
+                <button class="btn btn-secondary btn-sm me-2"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-secondary btn-sm"><i class="bi bi-printer"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mt-4">
+                  <div class="table-responsive bg-white shadow rounded">
+                      <table class="table mb-0 table-center">
+                          <thead>
+                              <tr>
+                                  <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                                  <th class="border-bottom p-3" style="min-width: 180px;">Department Name</th>
+                                  <th class="border-bottom p-3" style="min-width: 150px;">Department Description</th>
+                                  <th class="border-bottom p-3" style="min-width: 150px;">Is Deleted</th>
+                                  <th class="border-bottom p-3" style="text-align: center;">Fees</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let appointment of appointments">
+                                  <td class="p-3">{{appointment.id}}</td>
+                                  <td class="p-3">{{ appointment.patientId }}</td>
+                                  <td class="p-3">{{ appointment.startTime | date:'dd/MM/yyyy HH:mm' }}</td>
+                                  <td class="p-3">{{ appointment.endTime | date:'dd/MM/yyyy HH:mm'  }}</td>
+                                  <td class="text-end p-3" style="text-align: center; display: flex; justify-content: center; align-items: center;">
+                                    <a class="btn btn-icon btn-pills btn-soft-success m-1">
+                                        <i class="fas fa-pencil"></i>
+                                    </a>
+                                    <a  class="btn btn-icon btn-pills btn-soft-danger m-1">
+                                        <i class="fas fa-times-circle"></i>
+                                    </a>
+                                </td>
+                              </tr>
+
+
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+            </div>
+            <!-- Diğer randevular buraya eklenebilir -->
+          </div>
+        </div>
+        <div class="tab-pane fade" id="gecmis-randevularim" role="tabpanel" aria-labelledby="gecmis-randevularim-tab">
+          <!-- Geçmiş randevular burada gösterilecek -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -39,6 +39,8 @@ import { ContactComponent } from './features/patient-features/contact/contact/co
 import { ChangePasswordComponent } from './features/auth/change-password/change-password/change-password.component';
 import { BookAppointmentComponent } from './features/appointments/components/book-appointment/book-appointment.component';
 import { DoctorProfileComponent } from './features/doctor-features/doctor-profile/components/doctor-profile/doctor-profile.component';
+import { CreateAppointment } from './features/patient-features/patient-appointment/models/create-appointment';
+import { CreateAppointmentComponent } from './features/patient-features/patient-appointment/components/create-appointment/create-appointment.component';
 
 
 export const routes: Routes = [
@@ -52,7 +54,7 @@ export const routes: Routes = [
   {path:"doctors",component:ListDoctorsComponent,canActivate: [authGuard]},
   {path:"departments",component:ListDepartmentsComponent,canActivate: [authGuard]},
   {path:"contact",component:ContactComponent,canActivate: [authGuard]},
-  {path:"book-appointment",component:BookAppointmentComponent,canActivate: [authGuard]},
+  {path:"book-appointment",component:CreateAppointmentComponent,canActivate: [authGuard]},
   ]},
 
   {path:"doctor",component:DoctorLayoutComponent,

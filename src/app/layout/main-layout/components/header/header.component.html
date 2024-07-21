@@ -1,67 +1,79 @@
-
-
 <header id="topnav" class="navigation sticky">
   <div class="container">
-      <!-- Logo container-->
-      <div>
-          <a class="logo" routerLink="/patient">
-              <span class="logo-light-mode">
-                  <img src="../assets/images/logo-dark.png" class="l-dark" height="22" alt="">
-                  <img src="../assets/images/logo-light.png" class="l-light" height="22" alt="">
-              </span>
-              <img src="../assets/images/logo-light.png" height="22" class="logo-dark-mode" alt="">
-          </a>
-      </div>
-      <!-- End Logo container-->
+    <!-- Logo container -->
+    <div>
+      <a class="logo" routerLink="/patient">
+        <span class="logo-light-mode">
+          <img src="../assets/images/logo-dark.png" class="l-dark" height="22" alt="">
+          <img src="../assets/images/logo-light.png" class="l-light" height="22" alt="">
+        </span>
+        <img src="../assets/images/logo-light.png" height="22" class="logo-dark-mode" alt="">
+      </a>
+    </div>
+    <!-- End Logo container -->
 
-      <!-- Start Mobile Toggle -->
-      <div class="menu-extras">
-          <div class="menu-item">
-              <!-- Mobile menu toggle-->
-              <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
-                  <div class="lines">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                  </div>
-              </a>
-              <!-- End mobile menu toggle-->
+    <!-- Start Mobile Toggle -->
+    <div class="menu-extras">
+      <div class="menu-item">
+        <!-- Mobile menu toggle -->
+        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+          <div class="lines">
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
+        </a>
+        <!-- End mobile menu toggle -->
       </div>
-      <!-- End Mobile Toggle -->
+    </div>
+    <!-- End Mobile Toggle -->
 
-      <!-- Start Dropdown -->
-      <ul class="dropdowns list-inline mb-0">
-          <li class="list-inline-item mb-0 ms-1">
-              <a routerLink="" class="btn btn-primary">Book Appointment</a>
-          </li>
+    <!-- Start Dropdown -->
+    <ul class="dropdowns list-inline mb-0">
+      <li class="list-inline-item mb-0 ms-1">
+        <a routerLink="book-appointment" class="btn btn-primary">Book Appointment</a>
+      </li>
+      <li class="list-inline-item mb-0 ms-1">
+        <div class="dropdown dropdown-primary">
+            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/doctors/genderneutral.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+            <div class="dropdown-menu dd-menu dropdown-menu-end shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                <a class="dropdown-item d-flex align-items-center text-dark" href="profile.html">
+                    <img src="../assets/images/doctors/genderneutral.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                    <div class="flex-1 ms-2">
+                        <span class="d-block mb-1">Hoşgeldiniz</span>
+                        <small class="text-muted">{{user}}</small>
+                    </div>
+                </a>
+                <a class="dropdown-item text-dark" routerLink="profile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                <div class="dropdown-divider border-top"></div>
+                <a class="dropdown-item text-dark" (click)="logout()"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+            </div>
+        </div>
+    </li>
+    </ul>
+    <!-- End Dropdown -->
+
+    <div id="navigation">
+      <!-- Navigation Menu -->
+      <ul class="navigation-menu nav-left nav-light">
+        <li class="has-submenu parent-menu-item">
+          <a routerLink="/patient">Home</a>
+        </li>
+        <li class="has-submenu parent-parent-menu-item">
+          <a routerLink="doctors">Doctors</a>
+        </li>
+        <li class="has-submenu parent-menu-item">
+          <a routerLink="departments">Departments</a>
+        </li>
+        <li class="has-submenu parent-menu-item">
+          <a routerLink="contact">Contact</a>
+        </li>
       </ul>
-      <!-- Start Dropdown -->
-
-      <div id="navigation">
-          <!-- Navigation Menu-->
-          <ul class="navigation-menu nav-left nav-light">
-              <li class="has-submenu parent-menu-item">
-                  <a routerLink="/patient">Home</a>
-              </li>
-
-              <li class="has-submenu parent-parent-menu-item">
-                  <a routerLink="doctors">Doctors</a>
-              </li>
-
-              <li class="has-submenu parent-menu-item">
-                  <a routerLink="departments">Departments</a>
-              </li>
-              <li class="has-submenu parent-menu-item">
-                <a routerLink="profile">Profile</a>
-            </li>
-
-              <li class="has-submenu parent-menu-item">
-                  <a routerLink="contact">Contact</a>
-              </li>
-
-          </ul><!--end navigation menu-->
-      </div><!--end navigation-->
-  </div><!--end container-->
-</header><!--end header-->
+      <!--end navigation menu-->
+    </div>
+    <!--end navigation-->
+  </div>
+  <!--end container-->
+</header>
+<!--end header-->
 <!-- Navbar End -->

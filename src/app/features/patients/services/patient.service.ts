@@ -11,6 +11,7 @@ import { ListPatient } from '../models/list-patient';
   providedIn: 'root'
 })
 export class PatientService {
+  private apiUrl = 'https://localhost:7144/api/Patient?Page=0&PageSize=1000';
   constructor(private httpClientService : HttpClientService){}
   create(patient: CreatePatient, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
     this.httpClientService.post({
@@ -65,5 +66,6 @@ export class PatientService {
         })
       );
   }
+
 
 }

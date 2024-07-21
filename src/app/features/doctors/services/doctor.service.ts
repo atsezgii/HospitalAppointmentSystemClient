@@ -42,6 +42,17 @@ export class DoctorService {
       );
   }
 
+  getByDepartment(departmentId: number,pageRequest: PageRequest): Observable<ApiResponse> {
+    return this.httpClientService.getByDepartment<ApiResponse>({ controller: 'Doctor',action:'by-department' }, pageRequest,departmentId)
+      .pipe(
+        catchError((errorResponse: HttpErrorResponse) => {
+          const errorMessage = (errorResponse && errorResponse.message) ? errorResponse.message : 'Unknown error';
+          return throwError(() => new Error(errorMessage)); // throwError fonksiyonunu kullanarak hata fırlatma
+        })
+      );
+  }
+
+
   updateDoctor(doctor: Partial<UpdateDoctor>): Observable<UpdateDoctor> {
     const requestParameter: Partial<RequestParameters> = {
       controller: 'Doctor'

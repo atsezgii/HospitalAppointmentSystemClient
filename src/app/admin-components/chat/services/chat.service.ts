@@ -10,7 +10,7 @@ export class ChatService {
   private messageReceivedCallback: (user: string, message: string) => void;
   constructor() {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:44317/chathub', { withCredentials: true })
+      .withUrl('https://localhost:7144/chathub', { withCredentials: true })
       .build();
 
     this.hubConnection.on('ReceiveMessage', (user: string, message: string) => {

@@ -34,7 +34,17 @@
                                       <input id="password" type="password" class="form-control" formControlName="password" name="password" placeholder="Password" required="">
                                   </div>
                               </div>
-
+                              <div class="col-md-12">
+                                <div class="mb-3">
+                                  <label class="form-label" for="userType">User Type</label>
+                                  <!-- <input formControlName="userType" id="userType" type="text" class="form-control" placeholder="userType :"> -->
+                                  <select formControlName="userType" class="form-select form-control" id="userType">
+                                    <option value="" disabled selected hidden>Please select an option</option>
+                                    <option value="doctor">doctor</option>
+                                    <option value="patient">patient</option>
+                                  </select>
+                                </div>
+                              </div><!--end col-->
                               <div class="col-md-12">
                                   <div class="d-grid">
                                       <button type="submit"  class="btn btn-primary">Register</button>

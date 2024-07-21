@@ -20,6 +20,7 @@ import { Position } from '../../../services/alertify/enums/Position';
 import { MessageType } from '../../../services/alertify/enums/MessageType';
 import { AlertifyService } from '../../../services/alertify/alertify.service';
 import { AuthService } from '../../auth/services/auth.service';
+import { DoctorService } from '../../doctors/services/doctor.service';
 
 @Component({
   selector: "app-doctor-schedule",
@@ -35,7 +36,8 @@ export class DoctorScheduleComponent implements OnInit {
   userName:string;
   startTime: string;
   endTime: string;
-  doctorId: number = 2;
+  doctorId: number;
+  userId: number;
   intervalInMinutes: number = 15;
   minDateTime: string;
   maxDateTime: string;
@@ -43,7 +45,8 @@ export class DoctorScheduleComponent implements OnInit {
     private authService:AuthService,
     private formBuilder: FormBuilder,
     private doctorScheduleService: DoctorScheduleService,
-    private alertify:AlertifyService
+    private alertify:AlertifyService,
+    private doctorService:DoctorService
   ) {}
 
   ngOnInit(): void {
@@ -83,17 +86,33 @@ export class DoctorScheduleComponent implements OnInit {
       });
     }
   }
-  onSubmit() {
-    const payload = {
-      doctorId: Number(this.authService.getCurrentUserId()),
-      startTime: new Date(this.startTime).toISOString(),
-      endTime: new Date(this.endTime).toISOString(),
-      intervalInMinutes: this.intervalInMinutes
-    };
-    this.addDoctorSchedule(payload);
-    console.log("Start Time:", payload);
+  async onSubmit() {
+    this.userId = Number(this.authService.getCurrentUserId());
+    console.log("UserId:", this.userId);
 
+    try {
+      const doctorsResponse = await this.doctorService.read(this.pageRequest).toPromise();
+      const doctor = doctorsResponse.items.find(d => d.userId === this.userId);
+      this.doctorId = doctor ? doctor.id : null;
+      console.log("DoctorId:", this.doctorId);
+
+      if (this.doctorId !== null) {
+        const payload = {
+          doctorId: this.doctorId,
+          startTime: new Date(this.startTime).toISOString(),
+          endTime: new Date(this.endTime).toISOString(),
+          intervalInMinutes: this.intervalInMinutes
+        };
+        this.addDoctorSchedule(payload);
+        console.log("Payload:", payload);
+      } else {
+        console.error("Doctor not found for the current user.");
+      }
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
   }
+
 
 
 

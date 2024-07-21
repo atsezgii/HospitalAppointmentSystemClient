@@ -21,6 +21,54 @@ export class HttpClientService {
       url = `${this.url(requsetParameters)}${id ? `/${id}` : ""}`
     return this.httpClient.get<T>(url, {headers: requsetParameters.headers})
   }
+  getByDepartment<T>(requestParameters: Partial<RequestParameters>, pageRequest?: PageRequest, departmentId?: number): Observable<T> {
+    let url: string = "";
+
+    if (requestParameters.fullEndPoint) {
+      url = requestParameters.fullEndPoint;
+    } else {
+      url = `${this.url(requestParameters)}`;
+
+      if (departmentId !== undefined && departmentId !== null) {
+        url += `?PageRequest.Page=${pageRequest.page}&PageRequest.PageSize=${pageRequest.size}&departmentId=${departmentId}`;
+      }
+
+      // url += `?PageRequest.Page=${pageRequest.page}&PageRequest.PageSize=${pageRequest.size}`;
+    }
+
+    let params = new HttpParams();
+    if (pageRequest) {
+      params = params
+        .set('PageRequest.Page', pageRequest.page.toString() || '0')
+        .set('PageRequest.PageSize', pageRequest.size.toString() || '10');
+    }
+
+    return this.httpClient.get<T>(url, { headers: requestParameters.headers, params });
+  }
+  getByPatient<T>(requestParameters: Partial<RequestParameters>, pageRequest?: PageRequest, patientId?: number): Observable<T> {
+    let url: string = "";
+
+    if (requestParameters.fullEndPoint) {
+      url = requestParameters.fullEndPoint;
+    } else {
+      url = `${this.url(requestParameters)}`;
+
+      if (patientId !== undefined && patientId !== null) {
+        url += `?PageRequest.Page=${pageRequest.page}&PageRequest.PageSize=${pageRequest.size}&patientId=${patientId}`;
+      }
+
+      // url += `?PageRequest.Page=${pageRequest.page}&PageRequest.PageSize=${pageRequest.size}`;
+    }
+
+    let params = new HttpParams();
+    if (pageRequest) {
+      params = params
+        .set('PageRequest.Page', pageRequest.page.toString() || '0')
+        .set('PageRequest.PageSize', pageRequest.size.toString() || '10');
+    }
+
+    return this.httpClient.get<T>(url, { headers: requestParameters.headers, params });
+  }
 
   getPaging<T>(requestParameters: Partial<RequestParameters>, pageRequest?: PageRequest): Observable<T> {
     let url: string = "";
@@ -37,7 +85,6 @@ export class HttpClientService {
 
       return this.httpClient.get<T>(url, { headers: requestParameters.headers, params });
     }
-
 
   post<T>(requestParameter:Partial<RequestParameters>, body:Partial<T>) : Observable<T>{
     let url : string = "";

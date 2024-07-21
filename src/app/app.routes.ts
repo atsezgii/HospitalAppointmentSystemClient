@@ -41,6 +41,7 @@ import { BookAppointmentComponent } from './features/appointments/components/boo
 import { DoctorProfileComponent } from './features/doctor-features/doctor-profile/components/doctor-profile/doctor-profile.component';
 import { CreateAppointment } from './features/patient-features/patient-appointment/models/create-appointment';
 import { CreateAppointmentComponent } from './features/patient-features/patient-appointment/components/create-appointment/create-appointment.component';
+import { FaqsComponent } from './features/patient-features/faqs/faqs.component';
 
 
 export const routes: Routes = [
@@ -54,6 +55,7 @@ export const routes: Routes = [
   {path:"doctors",component:ListDoctorsComponent,canActivate: [authGuard]},
   {path:"departments",component:ListDepartmentsComponent,canActivate: [authGuard]},
   {path:"contact",component:ContactComponent,canActivate: [authGuard]},
+  {path:"faqs",component:FaqsComponent,canActivate: [authGuard]},
   {path:"book-appointment",component:CreateAppointmentComponent,canActivate: [authGuard]},
   ]},
 
